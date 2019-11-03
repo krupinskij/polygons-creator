@@ -1,0 +1,133 @@
+.project-container {
+    display: grid;
+
+    grid-template-columns: auto 1fr 1fr;
+    gap: 1%;
+
+    height: 500px;
+    width: 1200px;
+
+    margin: 2%;
+    padding: 2%;
+
+    border: 1px solid black;
+
+    align-items: center;
+}
+
+.canvas-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    border: 1px solid black;
+
+    cursor: crosshair;
+}
+
+.polygons-panel {
+    display: grid;
+    grid-template-rows: min-content min-content;
+    gap: 2%;
+}
+.panel-section {
+    margin: 0 10px;
+    padding: 10px 10%;
+    border: 1px solid black;
+
+    display: flex;
+    flex-direction: column;
+
+    height: auto;
+}
+
+#div-polygons {
+    display: flex;
+
+    flex-direction: column;
+
+    height: 250px;
+}
+
+.btn {
+    padding: 5px 0;
+}
+
+.adding-btn {
+    font-size: 100%;
+}
+
+.adding-btn_add {
+    font-size: 120%;
+}
+
+.polygons-section {
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+.polygons-container {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.polygons-btn_polygon {
+    font-size: 90%;
+
+    margin: 0 5%;
+}
+
+.polygons-btn_cancel {
+    font-size: 100%;
+}
+
+.edition-panel {
+    display: grid;
+    grid-template-rows: min-content min-content;
+    gap: 2%;
+}
+
+.edition-btn,
+.relation-btn {
+    font-size: 90%;
+}
+
+.relation-btn_equal,
+.relation-btn_parallel {
+    font-size: 80%;
+
+    margin: 0 5%;
+
+}
+
+.relation-btn_equal span {
+    display: inline-block;
+
+    background-color: orange;
+
+    width: 50%;
+}
+
+.relation-btn_parallel span {
+    display: inline-block;
+
+    background-color: pink;
+
+    width: 50%;
+}
+
+#new-canvas {
+    display: none;
+}
+
+
+
+
+
+.line {
+    display: block;
+    border-top: 1px solid #888;
+    margin: 2px 0;
+}

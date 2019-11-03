@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<link rel="stylesheet" href="style.css">
+
+	<title>Lab1</title>
+</head>
+
+<body>
+	<div class="project-container">
+		<div class="canvas-panel">
+			<canvas width="600" height="500" id="canvas"></canvas>
+			<canvas width="800" height="800" id="new-canvas"></canvas>
+		</div>
+
+
+		<div class="polygons-panel">
+			<section class="panel-section adding-section">
+				<button class="adding-btn_add btn" id="button-add">Dodaj wielokąt</button>
+
+				<span class="line"></span>
+
+				<button class="adding-btn btn" id="button-clear">Wyczyść</button>
+				<button class="adding-btn btn" id="button-reset">Resetuj / Pokaż predefinowany wielokąt</button>
+			</section>
+
+			<section class="panel-section polygons-section">
+				<div class="polygons-container" id="div-polygons"></div>
+
+				<span class="line"></span>
+
+				<button class="polygons-btn_cancel btn" id="button-polygon-cancel" disabled="disabled">Zakończ edycję</button>
+			</section>
+		</div>
+
+		<div class="edition-panel">
+			<section class="panel-section edition-section" id="control-polygon">
+				<button class="edition-btn btn" id="button-polygon-movePolygon" class="polygon-btn" disabled="disabled">Przesuń
+					wielokąt</button>
+
+				<span class="line"></span>
+
+				<button class="edition-btn btn" id="button-polygon-moveVertex" class="polygon-btn" disabled="disabled">Przesuń
+					wierzchołek</button>
+				<button class="edition-btn btn" id="button-polygon-addVertex" class="polygon-btn" disabled="disabled">Dodaj
+					wierzchołek</button>
+				<button class="edition-btn btn" id="button-polygon-deleteVertex" class="polygon-btn" disabled="disabled">Usuń
+					wierzchołek</button>
+
+				<span class="line"></span>
+
+				<button class="edition-btn btn" id="button-polygon-moveEdge" class="polygon-btn" disabled="disabled">Przesuń
+					krawędź</button>
+			</section>
+
+			<section class="panel-section relation-section">
+				<button class="relation-btn btn" id="button-polygon-addRelation" class="polygon-btn" disabled="disabled">Dodaj
+					relację</button>
+
+				<span class="line"></span>
+
+				<button class="relation-btn_equal btn" id="button-relation-equal" class="polygon-btn"
+					disabled="disabled"><span>Równa długość</span></button>
+				<button class="relation-btn_parallel btn" id="button-relation-parallel" class="polygon-btn"
+					disabled="disabled"><span>Równoległe</span></button>
+
+					<span class="line"></span>
+
+					<button class="relation-btn btn" id="button-polygon-deleteRelation" class="polygon-btn" disabled="disabled">Usuń
+							relację</button>
+			</section>
+		</div>
+
+	</div>
+
+	<script src="classes.js"></script>
+	<script src="script.js"></script>
+
+	<script src="drawing.js"></script>
+	<script src="functions.js"></script>
+
+	<script src="edition.js"></script>
+	<script src="relation.js"></script>
+
+</body>
+
+</html>

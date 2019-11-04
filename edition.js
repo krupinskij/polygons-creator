@@ -22,7 +22,7 @@ const polygonButtons = [
 ]
 
 // teraz mamy kontrolery do manipulowania modyfikacjami
-// każdy z nich ma trzy listenery: mousedownListener, mousemoveListener i mouseupListener oraz potrzebne zmienne
+// każdy z nich ma trzy event handlery: mousedownEventHandler, mousemoveEventHandler i mouseupEventHandler oraz potrzebne zmienne
 
 let movePolygonController = {
 
@@ -30,12 +30,12 @@ let movePolygonController = {
 
 	canMovePolygon: false,
 
-	mousedownListener: event => {
+	mousedownEventHandler: event => {
 		movePolygonController.canMovePolygon = true;
 		state.prevPoint = getPoint(event);
 	},
 
-	mousemoveListener: event => {
+	mousemoveEventHandler: event => {
 		state.currPoint = getPoint(event);
 
 		if (movePolygonController.canMovePolygon) {
@@ -48,7 +48,7 @@ let movePolygonController = {
 		}
 	},
 
-	mouseupListener: event => {
+	mouseupEventHandler: event => {
 		movePolygonController.canMovePolygon = false;
 		state.prevPoint = state.currPoint = undefined;
 	}
@@ -64,7 +64,7 @@ let moveVertexController = {
 	vertexToMove: null,
 	indexToMove: null,
 
-	mousedownListener: event => {
+	mousedownEventHandler: event => {
 		if (moveVertexController.vertexFounded) {
 			moveVertexController.vertexToMove.color = "red";
 			moveVertexController.canMoveVertex = true;
@@ -75,7 +75,7 @@ let moveVertexController = {
 		}
 	},
 
-	mousemoveListener: event => {
+	mousemoveEventHandler: event => {
 		refreshCanvas();
 		state.currPoint = getPoint(event);
 		moveVertexController.vertexFounded = false;
@@ -109,7 +109,7 @@ let moveVertexController = {
 		}
 	},
 
-	mouseupListener: event => {
+	mouseupEventHandler: event => {
 		moveVertexController.canMoveVertex = false;
 		moveVertexController.vertexFounded = false;
 		if (moveVertexController.vertexToMove) moveVertexController.vertexToMove.color = "black";
@@ -127,7 +127,7 @@ let addVertexController = {
 	canAddVertex: false,
 	vertexToAdd: null,
 
-	mousemoveListener: event => {
+	mousemoveEventHandler: event => {
 
 		state.currPoint = getPoint(event);
 		addVertexController.canAddVertex = false;
@@ -154,7 +154,7 @@ let addVertexController = {
 
 	},
 
-	mousedownListener: event => {
+	mousedownEventHandler: event => {
 		const currPoint = getPoint(event);
 
 		if (addVertexController.canAddVertex) {
@@ -177,7 +177,7 @@ let addVertexController = {
 		}
 	},
 
-	mouseupListener: event => {
+	mouseupEventHandler: event => {
 
 		addVertexController.canAddVertex = false;
 		addVertexController.vertexToAdd.color = "black";
@@ -201,7 +201,7 @@ let deleteVertexController = {
 	vertexToDelete: null,
 	canDeleteVertex: false,
 
-	mousemoveListener: event => {
+	mousemoveEventHandler: event => {
 
 		refreshCanvas();
 		state.currPoint = getPoint(event);
@@ -216,7 +216,7 @@ let deleteVertexController = {
 		}
 	},
 
-	mousedownListener: event => {
+	mousedownEventHandler: event => {
 
 		if (deleteVertexController.canDeleteVertex) {
 
@@ -253,7 +253,7 @@ let deleteVertexController = {
 		}
 	},
 
-	mouseupListener: event => {
+	mouseupEventHandler: event => {
 		deleteVertexController.canDelete = false;
 		deleteVertexController.vertexToDelete = -1;
 
@@ -270,7 +270,7 @@ let moveEdgeController = {
 	canMoveEdge: false,
 	edgeToMove: [],
 
-	mousemoveListener: event => {
+	mousemoveEventHandler: event => {
 		refreshCanvas();
 		state.currPoint = getPoint(event);
 		moveEdgeController.edgeFounded = false;
@@ -309,7 +309,7 @@ let moveEdgeController = {
 		}
 	},
 
-	mousedownListener: event => {
+	mousedownEventHandler: event => {
 
 		if (moveEdgeController.edgeToMove) {
 			moveEdgeController.edgeToMove[0].color = "red";
@@ -326,7 +326,7 @@ let moveEdgeController = {
 
 	},
 
-	mouseupListener: event => {
+	mouseupEventHandler: event => {
 
 		moveEdgeController.canMoveEdge = false;
 		moveEdgeController.edgeFounded = false;
@@ -349,7 +349,7 @@ let deleteRelationController = {
 	canDeleteRelation: false,
 	vertexToDelete: null,
 
-	mousemoveListener: event => {
+	mousemoveEventHandler: event => {
 
 		state.currPoint = getPoint(event);
 		deleteRelationController.canDeleteRelation = false;
@@ -377,7 +377,7 @@ let deleteRelationController = {
 
 	},
 
-	mousedownListener: event => {
+	mousedownEventHandler: event => {
 
 		if (deleteRelationController.canDeleteRelation) {
 
@@ -391,7 +391,7 @@ let deleteRelationController = {
 		}
 	},
 
-	mouseupListener: event => {
+	mouseupEventHandler: event => {
 
 		deleteRelationController.canDeleteRelation = false;
 		deleteRelationController.vertexToDelete.color = "black";
@@ -439,16 +439,16 @@ function switchOn() {
 	state.currentPolygon.lastModification = this; // ustawiamy bieżącą modyfikację
 
 	// dodajemy listenery do canvasu
-	canvas.addEventListener('mousedown', this.mousedownListener)
-	canvas.addEventListener('mousemove', this.mousemoveListener)
-	canvas.addEventListener('mouseup', this.mouseupListener);
+	canvas.addEventListener('mousedown', this.mousedownEventHandler)
+	canvas.addEventListener('mousemove', this.mousemoveEventHandler)
+	canvas.addEventListener('mouseup', this.mouseupEventHandler);
 }
 
 // usuwanie modyfikacji
 function switchOff() {
-	canvas.removeEventListener('mousedown', this.mousedownListener)
-	canvas.removeEventListener('mousemove', this.mousemoveListener)
-	canvas.removeEventListener('mouseup', this.mouseupListener);
+	canvas.removeEventListener('mousedown', this.mousedownEventHandler)
+	canvas.removeEventListener('mousemove', this.mousemoveEventHandler)
+	canvas.removeEventListener('mouseup', this.mouseupEventHandler);
 
 	// odłączanie kontrolerów relacji equall/parallel (szczegóły relation.js)
 	makeEqualController.disconnect();
@@ -456,3 +456,5 @@ function switchOff() {
 	equalRelationBtm.setAttribute("disabled", "disabled");
 	parallelRelationBtm.setAttribute("disabled", "disabled");
 }
+
+

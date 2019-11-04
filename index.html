@@ -8,14 +8,14 @@
 
 	<link rel="stylesheet" href="style.css">
 
-	<title>Lab1</title>
+	<title>Polygon Creator</title>
 </head>
 
 <body>
 	<div class="project-container">
 		<div class="canvas-panel">
 			<canvas width="600" height="500" id="canvas"></canvas>
-			<canvas width="800" height="800" id="new-canvas"></canvas>
+			<canvas width="1200" height="1000" id="new-canvas"></canvas>
 		</div>
 
 
@@ -74,6 +74,20 @@
 					<button class="relation-btn btn" id="button-polygon-deleteRelation" class="polygon-btn" disabled="disabled">Usuń
 							relację</button>
 			</section>
+
+			<section class="panel-section edgeEdition-section">
+				<article class="edgeEdition-article">
+					<input type="checkbox" name="antialiasing" id="checkbox-antialiasing">
+					<label for="checkbox-antialiasing">Włącz antialiasing</label>
+				</article>
+
+				<span class="line"></span>
+
+				<article class="edgeEdition-article">
+					<label for="input-thickness">Ustaw grubość: </label>
+					<input type="number" name="thickness" class="thickness-inp" id="input-thickness" value="1" min="1" max="10">
+				</article>
+			</section>
 		</div>
 
 	</div>
@@ -86,6 +100,9 @@
 
 	<script src="edition.js"></script>
 	<script src="relation.js"></script>
+
+	<script src="antialiasing.js"></script>
+	<script src="thickness.js"></script>
 
 </body>
 

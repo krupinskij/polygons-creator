@@ -4,6 +4,9 @@
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 
+const newCanvas = document.getElementById("new-canvas");
+const newContext = newCanvas.getContext("2d");
+
 // trzy głowne przyciski:
 const addButton = document.getElementById("button-add"); // dodaje nowy wielokąt
 const clearButton = document.getElementById("button-clear"); // czyści tło
@@ -24,6 +27,8 @@ const state = {
   currPoint: null, // bieżacy naciśnięty punkt
 
   relationCount: 0, // liczymy ilość relacji (używane przy etykietach)
+
+  thickness: 1, // grubość krawędzi
 }
 
 // na przemian dodajemy wielokąt i kończymy dodawanie
@@ -67,6 +72,10 @@ function reset() {
   state.currPoint = null;
 
   state.relationsCount = 0;
+
+  state.thickness = 1;
+  antialiasingCheckBox.checked = false;
+  thicknessInp.value = 1;
 
   refreshCanvas();
 }

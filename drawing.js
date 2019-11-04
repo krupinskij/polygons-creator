@@ -78,7 +78,9 @@ function drawLine(pP, cP, color) {
         x++;
         y += yi;
       }
-      drawPixel({ x: x, y: y }, 1)
+      for(let i=0; i<state.thickness; i++) {
+        drawPixel({ x: x, y: Math.ceil(y-state.thickness/2) + i }, 1)
+      }
     }
 
   } else {
@@ -109,7 +111,9 @@ function drawLine(pP, cP, color) {
         y++;
         x += xi;
       }
-      drawPixel({ x: x, y: y }, 1)
+      for(let i=0; i<state.thickness; i++) {
+        drawPixel({ x: Math.ceil(x-state.thickness/2) + i, y: y }, 1)
+      }
     }
   }
 }

@@ -32,6 +32,7 @@ canvas {
     grid-template-rows: min-content min-content;
     gap: 2%;
 }
+
 .panel-section {
     margin: 0 10px;
     padding: 10px 10%;
@@ -85,7 +86,7 @@ canvas {
 
 .edition-panel {
     display: grid;
-    grid-template-rows: min-content min-content;
+    grid-template-rows: min-content min-content min-content;
     gap: 2%;
 }
 
@@ -120,6 +121,15 @@ canvas {
 
 #new-canvas {
     display: none;
+}
+
+.edgeEdition-article {
+    margin: 2% 0;
+    text-align: center;
+}
+
+.thickness-inp {
+    width: 20%;
 }
 
 

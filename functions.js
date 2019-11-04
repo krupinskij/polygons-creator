@@ -2,7 +2,17 @@
 
 function refreshCanvas() {
   context.clearRect(0, 0, canvas.width, canvas.height);
-  drawPolygons();
+
+  if (antialiasingCheckBox.checked) {
+    newContext.clearRect(0, 0, newCanvas.width, newCanvas.height);
+    const fS = newContext.fillStyle;
+    newContext.fillStyle = "white";
+    newContext.fillRect(0, 0, newCanvas.width, newCanvas.height);
+    newContext.fillStyle = fS;
+    multisampling()
+  } else {
+    drawPolygons();
+  }
 }
 
 // obliczamy dystans między dwoma punktami

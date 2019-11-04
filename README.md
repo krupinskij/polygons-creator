@@ -44,6 +44,8 @@ Najeżdżamy kursorem na wybraną krawędź z relacją (posiada ona etykietę, k
 
 Jeśli zakończyliśmy modyfikację wielokąta, naciskamy przycisk "Zakończ edycję", dzięki czemu wracamy do punktu wyjścia.
 
+Na koniec mamy również możliwość zmienienia grubości krawędzi oraz włączenia antialiasingu.
+
 ### NAJWAŻNIEJSZE ZAŁOŻENIA:
 - "Najmniejszym" wielokątem jest trójkąt. Nie można z niego usunąć wierzchołka ani stworzyć wielokąta o mniejszej liczbie wierzchołków.
 - Dwie kolejne krawędzie mogą być równoległe. To znaczy ułożą się na jednej prostej.

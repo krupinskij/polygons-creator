@@ -18,6 +18,14 @@ Przede wszystkim mamy trzy głowne przyciski:
 
 >_Wszystkie przyciski są aktywne lub nieaktywne, zależnie od tego co robimy_
 
+Poniżej mamy możliwość zmienienia grubości krawędzi oraz włączenia antialiasingu.
+
+Jeszcze niżej mamy możliwość wczytania lub zapisania wielokąta w formacie .json.
+
+- Aby wczytać wielokąt należy nacisnąć przycisk "Przeglądaj". Wyświetli nam się okno, w którym możemy wybrać plik do czytania. Należy wybrać plik w formacie ".json"! Następnie klikamy przycisk "Wczytaj wielokąt"
+- Aby zapisać wielokąt wpisujemy nazwę pliku, który chcemu utwórzyć (jeśli jej nie podamy zostanie wybrana domyślna "polygons"), po czym klikamy przycisk "Zapisz wielokąt".
+
+
 Po utworzeniu nowego wielokąta, pojawia się nowy przycisk z napisem "Edytuj wielokąt #{nr}". Po najechaniu na niego odpowiedni wielokąt staje się czerwony, żeby było wiadomo o który chodzi. Po naciśnięciu go możemy edytować dany wielokąt.
 Poniżej jest dodatkowy przycisk "Zakończ edycję", ale o nim później.
 
@@ -43,8 +51,6 @@ Poniżej jest również przycisk "Usuń relację".
 Najeżdżamy kursorem na wybraną krawędź z relacją (posiada ona etykietę, krawędź powinna się zapalić na czerwono, a także dwa wierzchołki!) i klikamy na nią. Po kliknięciu relacja powinna zniknąć.
 
 Jeśli zakończyliśmy modyfikację wielokąta, naciskamy przycisk "Zakończ edycję", dzięki czemu wracamy do punktu wyjścia.
-
-Na koniec mamy również możliwość zmienienia grubości krawędzi oraz włączenia antialiasingu.
 
 ### NAJWAŻNIEJSZE ZAŁOŻENIA:
 - "Najmniejszym" wielokątem jest trójkąt. Nie można z niego usunąć wierzchołka ani stworzyć wielokąta o mniejszej liczbie wierzchołków.

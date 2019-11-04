@@ -14,12 +14,12 @@
 <body>
 	<div class="project-container">
 		<div class="canvas-panel">
-			<canvas width="600" height="500" id="canvas"></canvas>
-			<canvas width="1200" height="1000" id="new-canvas"></canvas>
+			<canvas width="600" height="550" id="canvas"></canvas>
+			<canvas width="1200" height="1100" id="new-canvas"></canvas>
 		</div>
 
-
 		<div class="polygons-panel">
+
 			<section class="panel-section adding-section">
 				<button class="adding-btn_add btn" id="button-add">Dodaj wielokąt</button>
 
@@ -29,6 +29,35 @@
 				<button class="adding-btn btn" id="button-reset">Resetuj / Pokaż predefinowany wielokąt</button>
 			</section>
 
+			<section class="panel-section edgeEdition-section">
+				<article class="edgeEdition-article">
+					<input type="checkbox" name="antialiasing" id="checkbox-antialiasing">
+					<label for="checkbox-antialiasing">Włącz antialiasing</label>
+				</article>
+
+				<span class="line"></span>
+
+				<article class="edgeEdition-article">
+					<label for="input-thickness">Ustaw grubość: </label>
+					<input type="number" name="thickness" class="thickness-inp" id="input-thickness" value="1" min="1" max="10">
+				</article>
+			</section>
+
+			<section class="panel-section json-section">
+				<input type="file" name="load" class="load-inp" id="file-load" accept=".json">
+				<button class="btn" id="load-json">Wczytaj wielokąt</button>
+
+				<span class="line"></span>
+
+				<label for="save-name">Podaj nazwę pliku: </label>
+				<input type="text" id="save-name">
+				<button class="btn" id="save-json">Zapisz wielokąt</button>
+			</section>
+
+		</div>
+
+		<div class="edition-panel">
+
 			<section class="panel-section polygons-section">
 				<div class="polygons-container" id="div-polygons"></div>
 
@@ -36,9 +65,7 @@
 
 				<button class="polygons-btn_cancel btn" id="button-polygon-cancel" disabled="disabled">Zakończ edycję</button>
 			</section>
-		</div>
 
-		<div class="edition-panel">
 			<section class="panel-section edition-section" id="control-polygon">
 				<button class="edition-btn btn" id="button-polygon-movePolygon" class="polygon-btn" disabled="disabled">Przesuń
 					wielokąt</button>
@@ -69,25 +96,13 @@
 				<button class="relation-btn_parallel btn" id="button-relation-parallel" class="polygon-btn"
 					disabled="disabled"><span>Równoległe</span></button>
 
-					<span class="line"></span>
-
-					<button class="relation-btn btn" id="button-polygon-deleteRelation" class="polygon-btn" disabled="disabled">Usuń
-							relację</button>
-			</section>
-
-			<section class="panel-section edgeEdition-section">
-				<article class="edgeEdition-article">
-					<input type="checkbox" name="antialiasing" id="checkbox-antialiasing">
-					<label for="checkbox-antialiasing">Włącz antialiasing</label>
-				</article>
-
 				<span class="line"></span>
 
-				<article class="edgeEdition-article">
-					<label for="input-thickness">Ustaw grubość: </label>
-					<input type="number" name="thickness" class="thickness-inp" id="input-thickness" value="1" min="1" max="10">
-				</article>
+				<button class="relation-btn btn" id="button-polygon-deleteRelation" class="polygon-btn" disabled="disabled">Usuń
+					relację</button>
 			</section>
+
+
 		</div>
 
 	</div>
@@ -103,6 +118,8 @@
 
 	<script src="antialiasing.js"></script>
 	<script src="thickness.js"></script>
+
+	<script src="convertJSON.js"></script>
 
 </body>
 

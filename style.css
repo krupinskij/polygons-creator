@@ -4,33 +4,15 @@
     grid-template-columns: auto 1fr 1fr;
     gap: 1%;
 
-    height: 500px;
+    height: 600px;
     width: 1200px;
 
-    margin: 2%;
-    padding: 2%;
+    margin: 1% 2%;
+    padding: 1% 2%;
 
     border: 1px solid black;
 
     align-items: center;
-}
-
-.canvas-panel {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-canvas {
-    border: 1px solid black;
-
-    cursor: crosshair;
-}
-
-.polygons-panel {
-    display: grid;
-    grid-template-rows: min-content min-content;
-    gap: 2%;
 }
 
 .panel-section {
@@ -44,17 +26,43 @@ canvas {
     height: auto;
 }
 
-#div-polygons {
-    display: flex;
-
-    flex-direction: column;
-
-    height: 250px;
-}
-
 .btn {
     padding: 5px 0;
 }
+
+.line {
+    display: block;
+    border-top: 1px solid #888;
+    margin: 2px 0;
+}
+
+/* /// CANVAS PANEL /// */
+
+.canvas-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    border: 1px solid black;
+
+    cursor: crosshair;
+}
+
+#new-canvas {
+    display: none;
+}
+
+/* /// POLYGONS PANEL /// */
+
+.polygons-panel {
+    display: grid;
+    grid-template-rows: min-content min-content min-content;
+    gap: 2%;
+}
+
+/* ADDING SECTION */
 
 .adding-btn {
     font-size: 100%;
@@ -64,6 +72,47 @@ canvas {
     font-size: 120%;
 }
 
+/* EDGE EDITION SECTION */
+
+.edgeEdition-article {
+    margin: 2% 0;
+    text-align: center;
+}
+
+.thickness-inp {
+    width: 20%;
+}
+
+/* JSON SECTION */
+
+.json-section {
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.json-section * {
+    margin: 1% 0;
+}
+
+.json-section .line {
+    margin: 3% 0;
+}
+
+.load-inp {
+    width: 100%;;
+}
+
+/* /// EDITION PANEL /// */
+
+.edition-panel {
+    display: grid;
+    grid-template-rows: auto min-content min-content;
+    gap: 2%;
+}
+
+/* POLYGONS SECTION */
+
 .polygons-section {
     display: grid;
     grid-template-rows: 1fr auto;
@@ -72,6 +121,10 @@ canvas {
 .polygons-container {
     height: 100%;
     overflow-y: scroll;
+
+    display: flex;
+    flex-direction: column;
+    height: 100px;
 }
 
 .polygons-btn_polygon {
@@ -84,11 +137,7 @@ canvas {
     font-size: 100%;
 }
 
-.edition-panel {
-    display: grid;
-    grid-template-rows: min-content min-content min-content;
-    gap: 2%;
-}
+/* EDITION & RELATION SECTION */
 
 .edition-btn,
 .relation-btn {
@@ -117,27 +166,4 @@ canvas {
     background-color: pink;
 
     width: 50%;
-}
-
-#new-canvas {
-    display: none;
-}
-
-.edgeEdition-article {
-    margin: 2% 0;
-    text-align: center;
-}
-
-.thickness-inp {
-    width: 20%;
-}
-
-
-
-
-
-.line {
-    display: block;
-    border-top: 1px solid #888;
-    margin: 2px 0;
 }

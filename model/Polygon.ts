@@ -1,11 +1,11 @@
 import Vertex from './Vertex.js';
 
-import { Modification } from '../enum/Modification';
-import { Color } from '../enum/Color';
+import { Modification } from '../enum/Modification.js';
+import { Color } from '../enum/Color.js';
 
 export default class Polygon {
     public vertices: Array<Vertex>;
-    private button: HTMLButtonElement;
+    public button: HTMLButtonElement;
     public lastModification: Modification;
 
     constructor(button: HTMLButtonElement) {

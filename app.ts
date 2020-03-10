@@ -96,11 +96,16 @@ export default class app {
         refreshCanvas();
     }
 
-    private static addVertex(event: MouseEvent) {
+    private static addVertex(event: MouseEvent): void {
 
         if (app.currentPolygon === null) throw new Error("Wystąpił błąd podczas dodawania wielokąta!")
 
         app.prevPoint = getPoint(event, app.canvas);
+
+        if (app.currentPolygon.vertices.length > 2 && calcDistance(app.prevPoint, app.currentPolygon.vertices[0].position) <= 10) {
+            app.endAdding();
+            return;
+          }
 
         if (app.currentPolygon.vertices.length > 0) {
             app.currentPolygon.vertices[app.currentPolygon.vertices.length - 1].edgeColor = Color.Black;

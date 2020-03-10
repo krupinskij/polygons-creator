@@ -1,8 +1,9 @@
-import { Vertex } from './Vertex';
-import { Modification } from './Modification';
-import { Color } from './Color';
+import Vertex from './Vertex.js';
 
-export class Polygon {
+import { Modification } from '../enum/Modification';
+import { Color } from '../enum/Color';
+
+export default class Polygon {
     public vertices: Array<Vertex>;
     private button: HTMLButtonElement;
     public lastModification: Modification;

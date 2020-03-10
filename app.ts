@@ -49,6 +49,8 @@ export default class app {
 
             }
         })
+
+        app.clearButton.addEventListener("click", app.clear);
     }
 
     private static startAdding(): void {
@@ -142,6 +144,19 @@ export default class app {
             drawPoint(app.currentPolygon.vertices[0].position, 15, Color.Red);
         }
     }
+
+    private static clear(): void {
+        app.polygons = [];
+        app.polygonsInterator = 0;
+        app.currentPolygon = null;
+      
+        app.prevPoint = null;
+        app.currPoint = null;
+      
+        app.polygonsDiv.innerHTML = "";
+      
+        refreshCanvas();
+      }
 }
 
 app.init();

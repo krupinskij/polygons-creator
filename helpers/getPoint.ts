@@ -1,5 +1,7 @@
-import Point from '../model/Point.js'
+import app from '../app.js';
 
-export default function getPoint(event: MouseEvent, canvas: HTMLCanvasElement): Point {
-    return new Point(event.x - canvas.offsetLeft, event.y - canvas.offsetTop);
+import Point from '../model/Point.js';
+
+export default function getPoint(event: MouseEvent): Point {
+    return new Point(event.x - app.canvas.offsetLeft, event.y - app.canvas.offsetTop);
 }

@@ -1,6 +1,8 @@
 export enum Modification {
-    none,
-    aaa,
-    bbb,
-    ccc
+    None,
+    MovePolygon,
+    MoveVertex,
+    AddVertex,
+    DeleteVertex,
+    MoveEdge
 }

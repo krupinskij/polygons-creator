@@ -1,23 +1,35 @@
+import app from '../app.js';
+
 import Vertex from './Vertex.js';
 
-import { Modification } from '../enum/Modification.js';
 import { Color } from '../enum/Color.js';
+
+import refreshCanvas from '../helpers/refreshCanvas.js';
 
 export default class Polygon {
     public vertices: Array<Vertex>;
     public button: HTMLButtonElement;
-    public lastModification: Modification;
 
     constructor(button: HTMLButtonElement) {
         this.vertices = [];
         this.button = button;
-        this.lastModification = Modification.none;
 
         this.button.addEventListener('mouseover', () => { this.changeColor(Color.Red) });
         this.button.addEventListener('mouseleave', () => { this.changeColor(Color.Black) });
 
         this.button.addEventListener('click', () => {
-            // TO DO set current polygon
+            app.currentPolygon = this;
+
+            document.getElementById("button-polygon-cancel")?.removeAttribute("disabled");
+
+            app.addButton.setAttribute("disabled", "disabled");
+            app.clearButton.setAttribute("disabled", "disabled");
+
+            document.getElementById("button-polygon-movePolygon")?.removeAttribute("disabled");
+            document.getElementById("button-polygon-moveVertex")?.removeAttribute("disabled");
+            document.getElementById("button-polygon-addVertex")?.removeAttribute("disabled");
+            document.getElementById("button-polygon-deleteVertex")?.removeAttribute("disabled");
+            document.getElementById("button-polygon-moveEdge")?.removeAttribute("disabled");
         })
     }
 
@@ -26,6 +38,7 @@ export default class Polygon {
             vertex.color = color;
             vertex.edgeColor = color;
         });
-        // TO DO refreshCanvas();
+
+        refreshCanvas();
     }
 }

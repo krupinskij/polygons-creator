@@ -28,8 +28,8 @@ export default class app {
     public static context: CanvasRenderingContext2D = app.canvas.getContext("2d");
 
 
-    private static addButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-add");
-    private static clearButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-clear");
+    public static addButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-add");
+    public static clearButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-clear");
 
     private static polygonsDiv: HTMLDivElement = <HTMLDivElement>document.getElementById("div-polygons")
 
@@ -102,7 +102,7 @@ export default class app {
 
         if (app.currentPolygon === null) throw new Error("Wystąpił błąd podczas dodawania wielokąta!")
 
-        app.prevPoint = getPoint(event, app.canvas);
+        app.prevPoint = getPoint(event);
 
         if (app.currentPolygon.vertices.length > 2 && calcDistance(app.prevPoint, app.currentPolygon.vertices[0].position) <= 10) {
             app.endAdding();
@@ -131,7 +131,7 @@ export default class app {
 
         if (app.currentPolygon === null) throw new Error("Wystąpił błąd podczas dodawania wielokąta!")
 
-        app.currPoint = getPoint(event, app.canvas);
+        app.currPoint = getPoint(event);
 
         refreshCanvas();
         drawPoint(app.currPoint, 5, Color.Red);

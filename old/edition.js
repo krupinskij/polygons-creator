@@ -437,6 +437,7 @@ function switchOn() {
 	// usuwamy poprzednią modyfikację (jeśli jest)
 	if (state.currentPolygon.lastModification) switchOff.call(state.currentPolygon.lastModification);
 	state.currentPolygon.lastModification = this; // ustawiamy bieżącą modyfikację
+	console.log(state.currentPolygon.lastModification)
 
 	// dodajemy listenery do canvasu
 	canvas.addEventListener('mousedown', this.mousedownEventHandler)

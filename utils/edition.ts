@@ -628,7 +628,7 @@ let deleteRelationController = {
 			}
 
 			if (areInLine(vertex.position, vertex.nextVertex.position, app.currPoint)) {
-				if(vertex.relationId === null) continue;
+				if(vertex.relation === Relation.None) continue;
 				vertex.color = Color.Red;
 				vertex.edgeColor = Color.Red;
 				vertex.nextVertex.color = Color.Red;
@@ -692,6 +692,8 @@ moveEdgeBtn.addEventListener('click', (event: MouseEvent) => { switchOn.call(mov
 parallelRelationBtn.addEventListener('click', (event: MouseEvent) => { switchOn.call(makeParallelController) })
 equalRelationBtn.addEventListener('click', (event: MouseEvent) => { switchOn.call(makeEqualController) })
 
+deleteRelationBtn.addEventListener('click', (event: MouseEvent) => { switchOn.call(deleteRelationController) })
+
 addRelationBtn.addEventListener('click', event => {
 	equalRelationBtn.removeAttribute("disabled");
 	parallelRelationBtn.removeAttribute("disabled");
@@ -714,8 +716,8 @@ cancelButton.addEventListener('click', (event: MouseEvent) => {
 	addRelationBtn.setAttribute("disabled", "disabled");
 	deleteRelationBtn.setAttribute("disabled", "disabled");
 
-	equalRelationBtn.removeAttribute("disabled");
-	parallelRelationBtn.removeAttribute("disabled");
+	equalRelationBtn.setAttribute("disabled", "disabled");
+	parallelRelationBtn.setAttribute("disabled", "disabled");
 
 	app.prevPoint = app.currPoint = null;
 
@@ -737,6 +739,9 @@ function switchOn(this: Controller) {
 }
 
 function switchOff(this: Controller) {
+	equalRelationBtn.setAttribute("disabled", "disabled");
+	parallelRelationBtn.setAttribute("disabled", "disabled");
+
 	app.canvas.removeEventListener('mousedown', this.mousedownEventHandler)
 	app.canvas.removeEventListener('mousemove', this.mousemoveEventHandler)
 	app.canvas.removeEventListener('mouseup', this.mouseupEventHandler);

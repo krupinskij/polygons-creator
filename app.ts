@@ -28,8 +28,11 @@ export default class app {
 
     public static thickness: number = 1;
 
-    public static canvas: any = document.getElementById("canvas");
-    public static context: CanvasRenderingContext2D = app.canvas.getContext("2d");
+    public static canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement;
+    public static context: CanvasRenderingContext2D = app.canvas.getContext("2d") as CanvasRenderingContext2D;
+
+    public static hCanvas: HTMLCanvasElement = document.getElementById("hidden-canvas") as HTMLCanvasElement;
+    public static hContext: CanvasRenderingContext2D = app.hCanvas.getContext("2d") as CanvasRenderingContext2D;
 
 
     public static addButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-add");

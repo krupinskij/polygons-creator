@@ -26,6 +26,8 @@ export default class app {
 
     public static relationIterator: number = 0;
 
+    public static thickness: number = 1;
+
     public static canvas: any = document.getElementById("canvas");
     public static context: CanvasRenderingContext2D = app.canvas.getContext("2d");
 

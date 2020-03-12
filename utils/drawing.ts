@@ -73,8 +73,8 @@ export function drawLine(pP: Point, cP: Point, color: Color) {
                 x++;
                 y += yi;
             }
-            for (let i = 0; i < 1; i++) {
-                drawPixel({ x: x, y: Math.ceil(y - 1 / 2) + i }, 1)
+            for (let i = 0; i < app.thickness; i++) {
+                drawPixel({ x: x, y: Math.ceil(y - app.thickness / 2) + i }, 1)
             }
         }
 
@@ -106,8 +106,8 @@ export function drawLine(pP: Point, cP: Point, color: Color) {
                 y++;
                 x += xi;
             }
-            for (let i = 0; i < 1; i++) {
-                drawPixel({ x: Math.ceil(x - 1 / 2) + i, y: y }, 1)
+            for (let i = 0; i < app.thickness; i++) {
+                drawPixel({ x: Math.ceil(x - app.thickness / 2) + i, y: y }, 1)
             }
         }
     }

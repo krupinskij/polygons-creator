@@ -45,7 +45,6 @@ saveBtn.addEventListener('click', () => {
 	a.href = window.URL.createObjectURL(new Blob([polygonJSON], { type: "octet/stream" }));
 	a.download = (saveInput.value.length > 0 ? saveInput.value : "polygons") + ".json";
 	a.click();
-	window.URL.revokeObjectURL(url);
 	
 	saveInput.value = "";
 	

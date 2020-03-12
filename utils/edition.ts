@@ -29,7 +29,7 @@ const parallelRelationBtn: HTMLButtonElement = <HTMLButtonElement>document.getEl
 
 const cancelButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-polygon-cancel");
 
-interface Controller {
+interface IController {
 	modification: Modification;
 
 	mousedownEventHandler(event: MouseEvent): void;
@@ -681,7 +681,7 @@ let deleteRelationController = {
 	}
 }
 
-let currentController: Controller | null = null;
+let currentController: IController | null = null;
 
 movePolygonBtn.addEventListener('click', (event: MouseEvent) => { switchOn.call(movePolygonController) });
 moveVertexBtn.addEventListener('click', (event: MouseEvent) => { switchOn.call(moveVertexController) });
@@ -705,7 +705,7 @@ deleteRelationBtn.addEventListener('click', event => {
 })
 
 cancelButton.addEventListener('click', (event: MouseEvent) => {
-	switchOff.call(currentController as Controller);
+	switchOff.call(currentController as IController);
 
 	movePolygonBtn.setAttribute("disabled", "disabled");
 	moveVertexBtn.setAttribute("disabled", "disabled");
@@ -727,7 +727,7 @@ cancelButton.addEventListener('click', (event: MouseEvent) => {
 	app.currentPolygon = null;
 })
 
-function switchOn(this: Controller) {
+function switchOn(this: IController) {
 	if (app.currentPolygon === null) throw new Error("Wystąpił błąd podczas próby modyfikacji!")
 
 	if (currentController !== null) switchOff.call(currentController);
@@ -738,7 +738,7 @@ function switchOn(this: Controller) {
 	app.canvas.addEventListener('mouseup', this.mouseupEventHandler);
 }
 
-function switchOff(this: Controller) {
+function switchOff(this: IController) {
 	equalRelationBtn.setAttribute("disabled", "disabled");
 	parallelRelationBtn.setAttribute("disabled", "disabled");
 

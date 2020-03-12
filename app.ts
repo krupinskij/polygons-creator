@@ -17,7 +17,7 @@ export default class app {
 
     public static polygons: Array<Polygon> = [];
     public static currentPolygon: Polygon | null = null;
-    private static polygonsInterator: number = 0;
+    public static polygonsInterator: number = 0;
 
     public static mode: Mode = Mode.Default;
 
@@ -38,7 +38,7 @@ export default class app {
     public static addButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-add");
     public static clearButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-clear");
 
-    private static polygonsDiv: HTMLDivElement = <HTMLDivElement>document.getElementById("div-polygons")
+    public static polygonsDiv: HTMLDivElement = <HTMLDivElement>document.getElementById("div-polygons")
 
 
     public static init(): void {
@@ -152,7 +152,7 @@ export default class app {
         }
     }
 
-    private static clear(): void {
+    public static clear(): void {
         app.polygons = [];
         app.polygonsInterator = 0;
         app.currentPolygon = null;

@@ -3,8 +3,8 @@ import Point from './model/Point.js';
 import Vertex from './model/Vertex.js';
 import Polygon from './model/Polygon.js';
 
-import { Mode } from './enum/Mode.js';
-import { Color } from './enum/Color.js';
+import { Mode } from './constants/Mode.js';
+import { Color } from './constants/Color.js';
 
 import getPoint from './helpers/getPoint.js';
 import refreshCanvas from './helpers/refreshCanvas.js';

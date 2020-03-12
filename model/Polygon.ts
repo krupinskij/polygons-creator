@@ -2,7 +2,7 @@ import app from '../app.js';
 
 import Vertex from './Vertex.js';
 
-import { Color } from '../enum/Color.js';
+import { Color } from '../constants/Color.js';
 
 import refreshCanvas from '../helpers/refreshCanvas.js';
 

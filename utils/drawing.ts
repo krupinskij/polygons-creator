@@ -4,8 +4,8 @@ import Point from "../model/Point.js";
 
 import refreshCanvas from '../helpers/refreshCanvas.js';
 
-import { Color } from "../enum/Color.js";
-import { Relation } from '../enum/Relation.js';
+import { Color } from "../constants/Color.js";
+import { Relation } from '../constants/Relation.js';
 
 const antialiasingCheckBox: HTMLInputElement = document.getElementById("checkbox-antialiasing") as HTMLInputElement;
 

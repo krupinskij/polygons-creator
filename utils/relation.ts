@@ -2,7 +2,7 @@ import app from '../app.js';
 
 import Vertex from "../model/Vertex.js";
 
-import { Relation } from '../enum/Relation.js';
+import { Relation } from '../constants/Relation.js';
 
 import calcDistance from '../helpers/calcDistance.js';
 

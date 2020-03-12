@@ -2,7 +2,7 @@ import app from '../app.js';
 
 import { drawPolygons, multisampling } from '../utils/drawing.js';
 
-import { Color } from '../enum/Color.js';
+import { Color } from '../constants/Color.js';
 
 const antialiasingCheckBox: HTMLInputElement = document.getElementById("checkbox-antialiasing") as HTMLInputElement;
 

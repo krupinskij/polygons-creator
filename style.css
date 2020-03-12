@@ -50,7 +50,7 @@ canvas {
     cursor: crosshair;
 }
 
-#new-canvas {
+#hidden-canvas {
     display: none;
 }
 

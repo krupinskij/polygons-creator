@@ -15,6 +15,7 @@ export default class Vertex {
     public nextVertex: Vertex | null;
 
     public relation: Relation;
+    public relationId: number | null;
     public correspondingVertex: Vertex | null;
 
     constructor(position: Point) {
@@ -28,6 +29,7 @@ export default class Vertex {
         this.nextVertex = null;
 
         this.relation = Relation.None;
+        this.relationId = null;
         this.correspondingVertex = null;
     }
 }

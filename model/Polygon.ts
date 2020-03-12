@@ -30,6 +30,8 @@ export default class Polygon {
             document.getElementById("button-polygon-addVertex")?.removeAttribute("disabled");
             document.getElementById("button-polygon-deleteVertex")?.removeAttribute("disabled");
             document.getElementById("button-polygon-moveEdge")?.removeAttribute("disabled");
+            document.getElementById("button-polygon-addRelation")?.removeAttribute("disabled");
+            document.getElementById("button-polygon-deleteRelation")?.removeAttribute("disabled");
         })
     }
 

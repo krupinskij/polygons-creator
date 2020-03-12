@@ -3,6 +3,7 @@ import app from '../app.js'
 import Point from "../model/Point.js";
 
 import { Color } from "../enum/Color.js";
+import { Relation } from '../enum/Relation.js';
 
 export function drawPoint(p: Point, r: number, color: Color): void {
 
@@ -18,6 +19,24 @@ export function drawPoint(p: Point, r: number, color: Color): void {
 function drawPixel(p: Point, w: number): void {
     app.context.fillRect(p.x, p.y, w, w);
 }
+
+function drawRelationMark(p1: Point, p2: Point, relation: Relation, id: number) {
+
+    const x = (p1.x + p2.x) / 2;
+    const y = (p1.y + p2.y) / 2;
+  
+    if (relation === Relation.Equal) {
+      app.context.fillStyle = Color.Orange;
+    } else if (relation === Relation.Parallel) {
+      app.context.fillStyle = Color.Pink;
+    } else {
+      app.context.fillStyle = Color.Black;
+    }
+  
+    app.context.fillRect(x + 10, y + 10, 25, 25);
+    app.context.fillStyle = Color.Black;
+    app.context.fillText(String(id), x + 15, y + 25)
+  }
 
 export function drawLine(pP: Point, cP: Point, color: Color) {
 
@@ -100,6 +119,10 @@ export function drawPolygons() {
         for (let i = 0; i < polygon.vertices.length; i++) {
             drawLine(polygon.vertices[i].position, polygon.vertices[(i + 1) % polygon.vertices.length].position, polygon.vertices[i].edgeColor);
             drawPoint(polygon.vertices[i].position, polygon.vertices[i].radius, polygon.vertices[i].color);
+
+            if (polygon.vertices[i].relationId !== null) {
+                drawRelationMark(polygon.vertices[i].position, polygon.vertices[(i + 1) % polygon.vertices.length].position, polygon.vertices[i].relation, polygon.vertices[i].relationId as number)
+              }
         }
 
     })

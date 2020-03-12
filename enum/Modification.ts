@@ -4,5 +4,9 @@ export enum Modification {
     MoveVertex,
     AddVertex,
     DeleteVertex,
-    MoveEdge
+    MoveEdge,
+
+    MakeParallel,
+    MakeEqual,
+    DeleteRelation
 }

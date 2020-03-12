@@ -11,7 +11,10 @@ import refreshCanvas from '../helpers/refreshCanvas.js';
 import calcDistance from '../helpers/calcDistance.js';
 import areInLine from '../helpers/areInLine.js';
 
+import { addRelation, correctRelations } from './relation.js';
+
 import { drawPoint } from '../utils/drawing.js';
+import { Relation } from "../enum/Relation.js";
 
 const movePolygonBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-polygon-movePolygon");
 const moveVertexBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-polygon-moveVertex");
@@ -20,6 +23,9 @@ const deleteVertexBtn: HTMLButtonElement = <HTMLButtonElement>document.getElemen
 const moveEdgeBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-polygon-moveEdge");
 const addRelationBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-polygon-addRelation");
 const deleteRelationBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-polygon-deleteRelation");
+
+const equalRelationBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-relation-equal");
+const parallelRelationBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-relation-parallel");
 
 const cancelButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-polygon-cancel");
 
@@ -128,6 +134,8 @@ let moveVertexController = {
 
 			refreshCanvas();
 		}
+
+		correctRelations(moveVertexController.indexToMove as number);
 	},
 
 	mouseupEventHandler: (event: MouseEvent) => {
@@ -204,6 +212,16 @@ let addVertexController = {
 			app.currentPolygon.vertices[index + 1].prevVertex = addVertexController.vertexToAdd;
 			(app.currentPolygon.vertices[index + 1].nextVertex as Vertex).prevVertex = app.currentPolygon.vertices[index + 1];
 
+			if (addVertexController.vertexToAdd.correspondingVertex !== null) {
+				addVertexController.vertexToAdd.correspondingVertex.relation = Relation.None;
+				addVertexController.vertexToAdd.correspondingVertex.correspondingVertex = null;
+				addVertexController.vertexToAdd.correspondingVertex.relationId = null;
+			}
+
+			addVertexController.vertexToAdd.relation = Relation.None;
+			addVertexController.vertexToAdd.correspondingVertex = null;
+			addVertexController.vertexToAdd.relationId = null;
+
 		}
 	},
 
@@ -272,6 +290,26 @@ let deleteVertexController = {
 				vertex.prevVertex.nextVertex = vertex.nextVertex;
 				vertex.nextVertex.prevVertex = vertex.prevVertex;
 
+				if (vertex.correspondingVertex !== null) {
+					vertex.correspondingVertex.relation = Relation.None;
+					vertex.correspondingVertex.correspondingVertex = null;
+					vertex.correspondingVertex.relationId = null;
+				}
+
+				vertex.relation = Relation.None;
+				vertex.correspondingVertex = null;
+				vertex.relationId = null;
+
+				if (vertex.prevVertex.correspondingVertex !== null) {
+					vertex.prevVertex.correspondingVertex.relation = Relation.None;
+					vertex.prevVertex.correspondingVertex.correspondingVertex = null;
+					vertex.prevVertex.correspondingVertex.relationId = null;
+				}
+
+				vertex.prevVertex.relation = Relation.None;
+				vertex.prevVertex.correspondingVertex = null;
+				vertex.prevVertex.relationId = null;
+
 				app.currentPolygon.vertices.splice(index, 1);
 			}
 		}
@@ -338,6 +376,7 @@ let moveEdgeController = {
 			});
 
 			app.prevPoint = app.currPoint;
+			correctRelations(app.currentPolygon.vertices.findIndex(el => el === moveEdgeController.edgeToMove[0]));
 			refreshCanvas();
 		}
 	},
@@ -369,8 +408,272 @@ let moveEdgeController = {
 			moveEdgeController.edgeToMove[0].edgeColor = Color.Black;
 			moveEdgeController.edgeToMove[1].color = Color.Black;
 		}
-		
+
 		moveEdgeController.edgeToMove = [];
+
+		app.prevPoint = app.currPoint = null;
+
+		refreshCanvas();
+	}
+}
+
+const makeParallelController = {
+
+	modification: Modification.MakeParallel,
+
+	relationVertices: [] as Vertex[],
+	relationVertex: null as Vertex | null,
+	
+	canAddRelation: false,
+
+	mousemoveEventHandler: (event: MouseEvent) => {
+		app.currPoint = getPoint(event);
+		makeParallelController.canAddRelation = false;
+
+		if (makeParallelController.relationVertex !== null && makeParallelController.relationVertex !== makeParallelController.relationVertices[0]) {
+			if (!makeParallelController.relationVertices[0] || makeParallelController.relationVertex !== makeParallelController.relationVertices[0].nextVertex) {
+				makeParallelController.relationVertex.color = Color.Black;
+			}
+			makeParallelController.relationVertex.edgeColor = Color.Black;
+
+			if (!makeParallelController.relationVertices[0] || makeParallelController.relationVertex.nextVertex !== makeParallelController.relationVertices[0]) {
+				if(makeParallelController.relationVertex.nextVertex === null) {
+					throw new Error("Wystąpił błąd podczas dodawania relacji!");
+				}
+				makeParallelController.relationVertex.nextVertex.color = Color.Black;
+			}
+		}
+
+		if(app.currentPolygon === null) {
+			throw new Error("Wystąpił błąd podczas dodawania relacji!");
+		}
+
+		for (const vertex of app.currentPolygon.vertices) {
+			if(vertex.nextVertex === null) {
+				throw new Error("Wystąpił błąd podczas dodawania relacji!");
+			}
+			if (areInLine(vertex.position, vertex.nextVertex.position, app.currPoint)) {
+
+				if (vertex.relation) break;
+
+				vertex.color = Color.Red;
+				vertex.edgeColor = Color.Red;
+				vertex.nextVertex.color = Color.Red;
+
+				makeParallelController.relationVertex = vertex;
+				makeParallelController.canAddRelation = true;
+			}
+		}
+
+		refreshCanvas();
+	},
+
+	mousedownEventHandler: (event: MouseEvent) => {
+		if (makeParallelController.canAddRelation) {
+			if(makeParallelController.relationVertex === null) {
+				throw new Error("Wystąpił błąd podczas dodawania relacji!");
+			}
+			makeParallelController.relationVertices.push(makeParallelController.relationVertex as Vertex);
+			makeParallelController.relationVertex.relation = Relation.Parallel;
+
+			if (makeParallelController.relationVertices.length === 2) {
+
+				if(makeParallelController.relationVertices[0].nextVertex === null || makeParallelController.relationVertices[1].nextVertex === null) {
+					throw new Error("Wystąpił błąd podczas dodawania relacji!");
+				}
+
+				addRelation(makeParallelController.relationVertices[0], makeParallelController.relationVertices[1]);
+
+				makeParallelController.relationVertices[0].color = Color.Black;
+				makeParallelController.relationVertices[0].edgeColor = Color.Black;
+				makeParallelController.relationVertices[0].nextVertex.color = Color.Black;
+
+				makeParallelController.relationVertices[1].color = Color.Black;
+				makeParallelController.relationVertices[1].edgeColor = Color.Black;
+				makeParallelController.relationVertices[1].nextVertex.color = Color.Black;
+
+				makeParallelController.relationVertex = null;
+				makeParallelController.relationVertices = [];
+
+			}
+
+			refreshCanvas();
+		}
+	},
+
+	mouseupEventHandler: (event: MouseEvent) => {
+		makeParallelController.canAddRelation = false;
+	}
+}
+
+const makeEqualController = {
+
+	modification: Modification.MakeParallel,
+
+	relationVertices: [] as Vertex[],
+	relationVertex: null as Vertex | null,
+	
+	canAddRelation: false,
+
+	mousemoveEventHandler: (event: MouseEvent) => {
+		app.currPoint = getPoint(event);
+		makeParallelController.canAddRelation = false;
+
+		if (makeParallelController.relationVertex !== null && makeParallelController.relationVertex !== makeParallelController.relationVertices[0]) {
+			if (!makeParallelController.relationVertices[0] || makeParallelController.relationVertex !== makeParallelController.relationVertices[0].nextVertex) {
+				makeParallelController.relationVertex.color = Color.Black;
+			}
+			makeParallelController.relationVertex.edgeColor = Color.Black;
+
+			if (!makeParallelController.relationVertices[0] || makeParallelController.relationVertex.nextVertex !== makeParallelController.relationVertices[0]) {
+				if(makeParallelController.relationVertex.nextVertex === null) {
+					throw new Error("Wystąpił błąd podczas dodawania relacji!");
+				}
+				makeParallelController.relationVertex.nextVertex.color = Color.Black;
+			}
+		}
+
+		if(app.currentPolygon === null) {
+			throw new Error("Wystąpił błąd podczas dodawania relacji!");
+		}
+
+		for (const vertex of app.currentPolygon.vertices) {
+			if(vertex.nextVertex === null) {
+				throw new Error("Wystąpił błąd podczas dodawania relacji!");
+			}
+			if (areInLine(vertex.position, vertex.nextVertex.position, app.currPoint)) {
+
+				if (vertex.relation) break;
+
+				vertex.color = Color.Red;
+				vertex.edgeColor = Color.Red;
+				vertex.nextVertex.color = Color.Red;
+
+				makeParallelController.relationVertex = vertex;
+				makeParallelController.canAddRelation = true;
+			}
+		}
+
+		refreshCanvas();
+	},
+
+	mousedownEventHandler: (event: MouseEvent) => {
+		if (makeParallelController.canAddRelation) {
+			if(makeParallelController.relationVertex === null) {
+				throw new Error("Wystąpił błąd podczas dodawania relacji!");
+			}
+			makeParallelController.relationVertices.push(makeParallelController.relationVertex as Vertex);
+			makeParallelController.relationVertex.relation = Relation.Equal;
+
+			if (makeParallelController.relationVertices.length === 2) {
+
+				if(makeParallelController.relationVertices[0].nextVertex === null || makeParallelController.relationVertices[1].nextVertex === null) {
+					throw new Error("Wystąpił błąd podczas dodawania relacji!");
+				}
+
+				addRelation(makeParallelController.relationVertices[0], makeParallelController.relationVertices[1]);
+
+				makeParallelController.relationVertices[0].color = Color.Black;
+				makeParallelController.relationVertices[0].edgeColor = Color.Black;
+				makeParallelController.relationVertices[0].nextVertex.color = Color.Black;
+
+				makeParallelController.relationVertices[1].color = Color.Black;
+				makeParallelController.relationVertices[1].edgeColor = Color.Black;
+				makeParallelController.relationVertices[1].nextVertex.color = Color.Black;
+
+				makeParallelController.relationVertex = null;
+				makeParallelController.relationVertices = [];
+
+			}
+
+			refreshCanvas();
+		}
+	},
+
+	mouseupEventHandler: (event: MouseEvent) => {
+		makeParallelController.canAddRelation = false;
+	}
+}
+
+let deleteRelationController = {
+
+	modification: Modification.DeleteRelation,
+
+	canDeleteRelation: false,
+	vertexToDelete: null as Vertex | null,
+
+	mousemoveEventHandler: (event: MouseEvent) => {
+
+		app.currPoint = getPoint(event);
+		deleteRelationController.canDeleteRelation = false;
+
+		if (deleteRelationController.vertexToDelete !== null && !deleteRelationController.canDeleteRelation) {
+			
+			if(deleteRelationController.vertexToDelete.nextVertex === null) {
+				throw new Error("Wystąpił błąd podczas usuwania relacji!");
+			}
+
+			deleteRelationController.vertexToDelete.color = Color.Black;
+			deleteRelationController.vertexToDelete.edgeColor = Color.Black;
+			deleteRelationController.vertexToDelete.nextVertex.color = Color.Black;
+		}
+
+		if(app.currentPolygon === null) {
+			throw new Error("Wystąpił błąd podczas usuwania relacji!");
+		}
+
+		for (const vertex of app.currentPolygon.vertices) {
+			if(vertex.nextVertex === null) {
+				throw new Error("Wystąpił błąd podczas usuwania relacji!");
+			}
+
+			if (areInLine(vertex.position, vertex.nextVertex.position, app.currPoint)) {
+				if(vertex.relationId === null) continue;
+				vertex.color = Color.Red;
+				vertex.edgeColor = Color.Red;
+				vertex.nextVertex.color = Color.Red;
+
+				deleteRelationController.canDeleteRelation = true;
+				deleteRelationController.vertexToDelete = vertex;
+
+			}
+		}
+
+		refreshCanvas();
+
+	},
+
+	mousedownEventHandler: (event: MouseEvent) => {
+
+		if (deleteRelationController.canDeleteRelation) {
+
+			if(deleteRelationController.vertexToDelete === null || deleteRelationController.vertexToDelete.correspondingVertex === null) {
+				throw new Error("Wystąpił błąd podczas usuwania relacji!");
+			}
+
+			deleteRelationController.vertexToDelete.correspondingVertex.relation = Relation.None;
+			deleteRelationController.vertexToDelete.correspondingVertex.relationId = null;
+			deleteRelationController.vertexToDelete.correspondingVertex.correspondingVertex = null;
+
+			deleteRelationController.vertexToDelete.relation = Relation.None;
+			deleteRelationController.vertexToDelete.relationId = null;
+			deleteRelationController.vertexToDelete.correspondingVertex = null;
+		}
+	},
+
+	mouseupEventHandler: (event: MouseEvent) => {
+
+		if(deleteRelationController.vertexToDelete === null || deleteRelationController.vertexToDelete.nextVertex === null) {
+			throw new Error("Wystąpił błąd podczas usuwania relacji!");
+		}
+
+		deleteRelationController.canDeleteRelation = false;
+		deleteRelationController.vertexToDelete.color = Color.Black;
+		deleteRelationController.vertexToDelete.edgeColor = Color.Black;
+		deleteRelationController.vertexToDelete.nextVertex.color = Color.Black;
+
+
+		deleteRelationController.vertexToDelete = null;
 
 		app.prevPoint = app.currPoint = null;
 
@@ -386,6 +689,19 @@ addVertexBtn.addEventListener('click', (event: MouseEvent) => { switchOn.call(ad
 deleteVertexBtn.addEventListener('click', (event: MouseEvent) => { switchOn.call(deleteVertexController) });
 moveEdgeBtn.addEventListener('click', (event: MouseEvent) => { switchOn.call(moveEdgeController) });
 
+parallelRelationBtn.addEventListener('click', (event: MouseEvent) => { switchOn.call(makeParallelController) })
+equalRelationBtn.addEventListener('click', (event: MouseEvent) => { switchOn.call(makeEqualController) })
+
+addRelationBtn.addEventListener('click', event => {
+	equalRelationBtn.removeAttribute("disabled");
+	parallelRelationBtn.removeAttribute("disabled");
+})
+
+deleteRelationBtn.addEventListener('click', event => {
+	equalRelationBtn.setAttribute("disabled", "disabled");
+	parallelRelationBtn.setAttribute("disabled", "disabled");
+})
+
 cancelButton.addEventListener('click', (event: MouseEvent) => {
 	switchOff.call(currentController as Controller);
 
@@ -394,6 +710,12 @@ cancelButton.addEventListener('click', (event: MouseEvent) => {
 	addVertexBtn.setAttribute("disabled", "disabled");
 	deleteVertexBtn.setAttribute("disabled", "disabled");
 	moveEdgeBtn.setAttribute("disabled", "disabled");
+
+	addRelationBtn.setAttribute("disabled", "disabled");
+	deleteRelationBtn.setAttribute("disabled", "disabled");
+
+	equalRelationBtn.removeAttribute("disabled");
+	parallelRelationBtn.removeAttribute("disabled");
 
 	app.prevPoint = app.currPoint = null;
 

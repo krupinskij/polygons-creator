@@ -24,6 +24,8 @@ export default class app {
     public static prevPoint: Point | null = null;
     public static currPoint: Point | null = null;
 
+    public static relationIterator: number = 0;
+
     public static canvas: any = document.getElementById("canvas");
     public static context: CanvasRenderingContext2D = app.canvas.getContext("2d");
 
@@ -65,8 +67,8 @@ export default class app {
         app.currentPolygon = new Polygon(polygonBtn);
         app.polygons.push(app.currentPolygon);
 
-        app.canvas.addEventListener("click", app.addVertex); // dodawanie wierzchołków po kliknięciu
-        app.canvas.addEventListener("mousemove", app.moveCursor); // poruszanie się kursorem
+        app.canvas.addEventListener("click", app.addVertex);
+        app.canvas.addEventListener("mousemove", app.moveCursor);
 
         app.mode = Mode.AddingPolygon;
 
@@ -149,6 +151,8 @@ export default class app {
         app.polygons = [];
         app.polygonsInterator = 0;
         app.currentPolygon = null;
+
+        app.relationIterator = 0;
       
         app.prevPoint = null;
         app.currPoint = null;

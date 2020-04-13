@@ -12,6 +12,9 @@ import refreshCanvas from './helpers/refreshCanvas';
 import calcDistance from './helpers/calcDistance';
 
 import { drawPoint, drawLine } from './utils/drawing';
+import './utils/edition';
+import './utils/convertJSON';
+import './utils/thickness';
 
 import "./style.css";
 

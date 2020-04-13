@@ -1,0 +1,19 @@
+{
+  "name": "polygons-creator",
+  "version": "1.0.0",
+  "description": "Stan programu jest zawarty w obiekcie state.\r W tym obiekcie w tablicy przechowujemy wielokąty.\r Każdy wielokąt przechowuje tablicę wierzchołków.\r Każdy wierzchołek przechowuje również informacje o krawędzi, którą \"rozpoczyna\", np. jej kolor.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krupinskij/polygons-creator.git"
+  },
+  "author": "Jan Krupiński",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krupinskij/polygons-creator/issues"
+  },
+  "homepage": "https://github.com/krupinskij/polygons-creator#readme"
+}

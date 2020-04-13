@@ -1,6 +1,6 @@
-import app from '../app.js';
+import app from '../app';
 
-import refreshCanvas from '../helpers/refreshCanvas.js';
+import refreshCanvas from '../helpers/refreshCanvas';
 
 const thicknessInp: HTMLInputElement = document.getElementById("input-thickness") as HTMLInputElement;
 

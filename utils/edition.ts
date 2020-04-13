@@ -1,20 +1,19 @@
-import app from "../app.js";
+import app from "../app";
 
-import Point from "../model/Point.js";
-import Vertex from "../model/Vertex.js";
+import Vertex from "../model/Vertex";
 
-import { Modification } from "../constants/Modification.js";
-import { Color } from "../constants/Color.js";
+import { Modification } from "../constants/Modification";
+import { Color } from "../constants/Color";
 
-import getPoint from '../helpers/getPoint.js';
-import refreshCanvas from '../helpers/refreshCanvas.js';
-import calcDistance from '../helpers/calcDistance.js';
-import areInLine from '../helpers/areInLine.js';
+import getPoint from '../helpers/getPoint';
+import refreshCanvas from '../helpers/refreshCanvas';
+import calcDistance from '../helpers/calcDistance';
+import areInLine from '../helpers/areInLine';
 
-import { addRelation, correctRelations } from './relation.js';
+import { addRelation, correctRelations } from './relation';
 
-import { drawPoint } from '../utils/drawing.js';
-import { Relation } from "../constants/Relation.js";
+import { drawPoint } from '../utils/drawing';
+import { Relation } from "../constants/Relation";
 
 const movePolygonBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-polygon-movePolygon");
 const moveVertexBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button-polygon-moveVertex");

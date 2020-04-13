@@ -1,4 +1,4 @@
-import Point from "../model/Point.js";
+import Point from "../model/Point";
 
 export default function areInLine(p1: Point, p2: Point, e: Point) {
 

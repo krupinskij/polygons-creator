@@ -1,10 +1,10 @@
-import app from '../app.js';
+import app from '../app';
 
-import Vertex from "../model/Vertex.js";
+import Vertex from "../model/Vertex";
 
-import { Relation } from '../constants/Relation.js';
+import { Relation } from '../constants/Relation';
 
-import calcDistance from '../helpers/calcDistance.js';
+import calcDistance from '../helpers/calcDistance';
 
 export function addRelation(v1: Vertex, v2: Vertex) {
 

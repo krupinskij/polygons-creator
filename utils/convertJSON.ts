@@ -1,12 +1,12 @@
-import app from '../app.js';
+import app from '../app';
 
-import Polygon from '../model/Polygon.js';
-import Vertex from '../model/Vertex.js';
+import Polygon from '../model/Polygon';
+import Vertex from '../model/Vertex';
 
-import { Relation } from '../constants/Relation.js';
-import { Color } from '../constants/Color.js';
+import { Relation } from '../constants/Relation';
+import { Color } from '../constants/Color';
 
-import refreshCanvas from '../helpers/refreshCanvas.js';
+import refreshCanvas from '../helpers/refreshCanvas';
 
 const fileInput: HTMLInputElement = document.getElementById("file-load") as HTMLInputElement;
 const loadBtn: HTMLButtonElement = document.getElementById("load-json") as HTMLButtonElement;

@@ -1,8 +1,8 @@
-import app from '../app.js';
+import app from '../app';
 
-import { drawPolygons, multisampling } from '../utils/drawing.js';
+import { drawPolygons, multisampling } from '../utils/drawing';
 
-import { Color } from '../constants/Color.js';
+import { Color } from '../constants/Color';
 
 const antialiasingCheckBox: HTMLInputElement = document.getElementById("checkbox-antialiasing") as HTMLInputElement;
 

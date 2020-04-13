@@ -1,11 +1,11 @@
-import app from '../app.js'
+import app from '../app'
 
-import Point from "../model/Point.js";
+import Point from "../model/Point";
 
-import refreshCanvas from '../helpers/refreshCanvas.js';
+import refreshCanvas from '../helpers/refreshCanvas';
 
-import { Color } from "../constants/Color.js";
-import { Relation } from '../constants/Relation.js';
+import { Color } from "../constants/Color";
+import { Relation } from '../constants/Relation';
 
 const antialiasingCheckBox: HTMLInputElement = document.getElementById("checkbox-antialiasing") as HTMLInputElement;
 

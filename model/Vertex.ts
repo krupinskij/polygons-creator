@@ -1,7 +1,7 @@
-import Point from './Point.js';
+import Point from './Point';
 
-import { Color } from '../constants/Color.js';
-import { Relation } from '../constants/Relation.js';
+import { Color } from '../constants/Color';
+import { Relation } from '../constants/Relation';
 
 export default class Vertex {
 

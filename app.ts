@@ -1,16 +1,19 @@
 
-import Point from './model/Point.js';
-import Vertex from './model/Vertex.js';
-import Polygon from './model/Polygon.js';
 
-import { Mode } from './constants/Mode.js';
-import { Color } from './constants/Color.js';
+import Vertex from './model/Vertex';
+import Point from './model/Point';
+import Polygon from './model/Polygon';
 
-import getPoint from './helpers/getPoint.js';
-import refreshCanvas from './helpers/refreshCanvas.js';
-import calcDistance from './helpers/calcDistance.js';
+import { Mode } from './constants/Mode';
+import { Color } from './constants/Color';
 
-import { drawPoint, drawLine } from './utils/drawing.js';
+import getPoint from './helpers/getPoint';
+import refreshCanvas from './helpers/refreshCanvas';
+import calcDistance from './helpers/calcDistance';
+
+import { drawPoint, drawLine } from './utils/drawing';
+
+import "./style.css";
 
 
 export default class app {

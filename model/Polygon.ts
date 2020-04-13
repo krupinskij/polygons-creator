@@ -1,10 +1,10 @@
-import app from '../app.js';
+import app from '../app';
 
-import Vertex from './Vertex.js';
+import Vertex from './Vertex';
 
-import { Color } from '../constants/Color.js';
+import { Color } from '../constants/Color';
 
-import refreshCanvas from '../helpers/refreshCanvas.js';
+import refreshCanvas from '../helpers/refreshCanvas';
 
 export default class Polygon {
     public vertices: Array<Vertex>;

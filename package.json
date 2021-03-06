@@ -34,17 +34,15 @@
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
   },
+  "browserslist": [
+    "defaults"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "*.{js,json,ts,css,scss}": [
-      "prettier"
-    ]
-  },
-  "browserslist": [
-    "defaults"
-  ]
+    "*.{js,ts,html,css,md}": "prettier --write"
+  }
 }

@@ -48,7 +48,6 @@ export default class app {
 
 
     public static init(): void {
-
         app.addButton.addEventListener("click", () => {
             switch (app.mode) {
                 case Mode.Default:
@@ -58,7 +57,7 @@ export default class app {
                     app.endAdding();
                     break;
                 default:
-                    throw new Error("Wystąpił błąd podczas dodawania wielokąta");
+                        throw new Error("Wystąpił błąd podczas dodawania wielokąta");
 
             }
         })

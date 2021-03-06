@@ -44,5 +44,8 @@
   },
   "lint-staged": {
     "*.{js,ts,html,css,md}": "prettier --write"
+  },
+  "dependencies": {
+    "materialize-css": "^1.0.0-rc.2"
   }
 }

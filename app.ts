@@ -56,6 +56,7 @@ export default class app {
   );
 
   public static init(): void {
+      console.log("aaa");
     app.addButton.addEventListener('click', () => {
       switch (app.mode) {
         case Mode.Default:

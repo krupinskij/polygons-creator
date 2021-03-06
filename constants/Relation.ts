@@ -1,5 +1,5 @@
 export enum Relation {
-    None,
-    Parallel,
-    Equal
+  None,
+  Parallel,
+  Equal,
 }

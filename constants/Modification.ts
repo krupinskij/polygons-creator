@@ -1,12 +1,12 @@
 export enum Modification {
-    None,
-    MovePolygon,
-    MoveVertex,
-    AddVertex,
-    DeleteVertex,
-    MoveEdge,
+  None,
+  MovePolygon,
+  MoveVertex,
+  AddVertex,
+  DeleteVertex,
+  MoveEdge,
 
-    MakeParallel,
-    MakeEqual,
-    DeleteRelation
+  MakeParallel,
+  MakeEqual,
+  DeleteRelation,
 }

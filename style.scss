@@ -1,5 +1,8 @@
 body {
   height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background-color: #eee;
 }
 
 @media only screen and (min-width: 993px) {
@@ -40,4 +43,15 @@ body {
 .link {
   color: inherit;
   text-decoration: underline;
+}
+
+.canvas-panel {
+  height: calc(100% - 20px);
+  margin: 10px;
+  border: 1px solid #bbb;
+  background-color: white;
+}
+
+#hidden-canvas {
+  display: none;
 }

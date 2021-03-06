@@ -25,8 +25,20 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/i,
+        test: /\.(s)?css$/i,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.svg$/,
+        use: [
+            {
+                loader: "file-loader",
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: "assets",
+                },
+            },
+        ],
       },
     ],
   },

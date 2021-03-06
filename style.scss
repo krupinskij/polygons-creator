@@ -1,0 +1,15 @@
+@media only screen and (min-width: 993px) {
+  nav a.sidenav-trigger {
+      display: block;
+  }
+}
+
+.page-footer {
+  position: absolute;
+  bottom: 0;
+}
+
+.link {
+  color: inherit;
+  text-decoration: underline;
+}

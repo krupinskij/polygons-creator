@@ -1,6 +1,6 @@
 import { Mode } from './constants/Mode';
 import { ErrorCode } from './constants/ErrorCode';
-import { getContext, getElementById } from './helpers/getElement';
+import { createNewTab, getContext, getElementById } from './helpers/getElement';
 import { throwError } from './helpers/throwError';
 import Polygon from './model/Polygon';
 import Point from '../model/Point';
@@ -18,9 +18,6 @@ export default class Creator {
   public static hCanvas: HTMLCanvasElement = getElementById('hidden-canvas');
   public static hContext: CanvasRenderingContext2D = getContext(Creator.hCanvas);
 
-  private static addButton: HTMLButtonElement;
-  private static stopButton: HTMLButtonElement;
-
   private static mode = Mode.Default;
 
   private static polygonsIterator = 0;
@@ -33,12 +30,6 @@ export default class Creator {
   public static thickness = 1;
 
   static init() {
-    Creator.addButton = getElementById('add-button');
-    Creator.addButton.addEventListener('click', Creator.startAdding);
-
-    Creator.stopButton = getElementById('stop-button');
-    Creator.stopButton.addEventListener('click', Creator.endAdding);
-
     Creator.resizeCanvas();
     window.addEventListener('resize', Creator.resizeCanvas);
   }
@@ -53,17 +44,27 @@ export default class Creator {
     Creator.hCanvas.width = Creator.canvas.width * 2;
   }
 
-  private static startAdding() {
+  public static startAdding(): HTMLAnchorElement {
     Creator.mode = Mode.Adding;
     Creator.polygonsIterator++;
     Creator.currentPolygon = new Polygon(Creator.polygonsIterator);
     Creator.polygons = [...Creator.polygons, Creator.currentPolygon];
 
+    const tabs: HTMLUListElement = getElementById('tabs');
+    const tab = createNewTab(Creator.polygonsIterator);
+    tab.addEventListener('click', () => {
+      Creator.currentPolygon =
+        Creator.polygons.find((polygon) => polygon.id === Creator.polygonsIterator) || null;
+    });
+    tabs.appendChild(tab);
+
     Creator.canvas.addEventListener('click', Creator.addVertex);
     Creator.canvas.addEventListener('mousemove', Creator.moveCursor);
+
+    return tab.firstChild as HTMLAnchorElement;
   }
 
-  private static endAdding(): void {
+  public static endAdding(): void {
     if (!Creator.currentPolygon) throwError(ErrorCode.AddPolygonError);
 
     const length = Creator.currentPolygon.vertices.length;
@@ -125,8 +126,9 @@ export default class Creator {
     if (Creator.prevPoint) drawLine(Creator.prevPoint, Creator.currPoint, Color.Blue);
 
     const length = Creator.currentPolygon.vertices.length;
-    if (length)
+    if (length) {
       drawLine(Creator.currentPolygon.vertices[0].position, Creator.currPoint, Color.Blue);
+    }
 
     if (
       length > 2 &&

@@ -7,10 +7,12 @@ import './src/assets/favicon.ico';
 const M = require('./node_modules/materialize-css/dist/js/materialize.min');
 
 import Creator from './src/creator';
+import { getElementById } from './src/helpers/getElement';
 
 document.addEventListener('DOMContentLoaded', function () {
   M.Sidenav.init(document.querySelectorAll('.sidenav'));
   M.Collapsible.init(document.querySelectorAll('.collapsible'));
+  M.Tabs.init(document.querySelectorAll('.tabs'));
 
   const sidenavInstance = M.Sidenav.getInstance(document.getElementById('slide-out'));
   document.querySelectorAll('#slide-out button').forEach((button) => {
@@ -20,4 +22,18 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   Creator.init();
+
+  const addButton = getElementById('add-button');
+  addButton.addEventListener('click', () => {
+    const a = Creator.startAdding();
+    const tabs = document.getElementById('tabs');
+    const instance = M.Tabs.getInstance(tabs);
+    instance.$tabLinks.add(a);
+    instance.select(a.id);
+  });
+
+  const stopButton = getElementById('stop-button');
+  stopButton.addEventListener('click', () => {
+    Creator.endAdding();
+  });
 });

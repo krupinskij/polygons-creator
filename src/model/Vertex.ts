@@ -16,7 +16,7 @@ export default class Vertex {
     this.prevVertex = null;
     this.nextVertex = null;
 
-    this.color = Color.Black;
+    this.color = Color.Blue;
     this.edgeColor = Color.Black;
   }
 }

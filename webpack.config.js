@@ -29,15 +29,15 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.svg$/,
+        test: /\.(svg|ico)$/,
         use: [
-            {
-                loader: "file-loader",
-                options: {
-                    name: '[name].[ext]',
-                    outputPath: "assets",
-                },
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets',
             },
+          },
         ],
       },
     ],

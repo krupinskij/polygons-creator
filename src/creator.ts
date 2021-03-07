@@ -23,8 +23,8 @@ export default class Creator {
       'canvas-container',
     ) as HTMLDivElement;
 
-    Creator.canvas.height = container.clientHeight - 10;
-    Creator.canvas.width = container.clientWidth - 10;
+    Creator.canvas.height = container.clientHeight;
+    Creator.canvas.width = container.clientWidth;
 
     Creator.hCanvas.height = Creator.canvas.height * 2;
     Creator.hCanvas.width = Creator.canvas.width * 2;

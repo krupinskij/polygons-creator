@@ -44,7 +44,7 @@ export default class Creator {
     Creator.hCanvas.width = Creator.canvas.width * 2;
   }
 
-  public static startAdding(): HTMLAnchorElement {
+  public static startAdding(): HTMLLIElement {
     Creator.mode = Mode.Adding;
     Creator.polygonsIterator++;
     Creator.currentPolygon = new Polygon(Creator.polygonsIterator);
@@ -61,7 +61,7 @@ export default class Creator {
     Creator.canvas.addEventListener('click', Creator.addVertex);
     Creator.canvas.addEventListener('mousemove', Creator.moveCursor);
 
-    return tab.firstChild as HTMLAnchorElement;
+    return tab as HTMLLIElement;
   }
 
   public static endAdding(): void {
@@ -136,5 +136,12 @@ export default class Creator {
     ) {
       drawPoint(Creator.currentPolygon.vertices[0].position, 15, Color.Blue);
     }
+  }
+
+  public static setCurrentPolygon(event: Event) {
+    const elem = event.target as HTMLElement;
+    const id = elem.id.substring(8);
+
+    Creator.currentPolygon = Creator.polygons.find((polygon) => polygon.id === +id) || null;
   }
 }

@@ -25,9 +25,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const addButton = getElementById('add-button');
   addButton.addEventListener('click', () => {
-    const a = Creator.startAdding();
+    const tab = Creator.startAdding();
     const tabs = document.getElementById('tabs');
     const instance = M.Tabs.getInstance(tabs);
+    tab.addEventListener('click', Creator.setCurrentPolygon);
+
+    const a = tab.firstChild as HTMLElement;
     instance.$tabLinks.add(a);
     instance.select(a.id);
   });

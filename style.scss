@@ -87,3 +87,17 @@ body {
 .tab-link {
   display: block !important;
 }
+
+.input-field input[type=number] {
+  width: 80%;
+}
+
+.input-field input[type=number]:focus {
+  border-bottom: 1px solid #448aff !important;
+  box-shadow: 0 1px 0 0 #448aff !important;
+}
+
+[type="checkbox"].filled-in:checked+span:not(.lever):after {
+  border-color: #448aff !important;
+  background-color: #448aff !important;
+}

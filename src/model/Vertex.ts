@@ -11,7 +11,7 @@ export default class Vertex {
   public edgeColor: Color;
 
   constructor(public position: Point) {
-    this.radius = 5;
+    this.radius = 10;
 
     this.prevVertex = null;
     this.nextVertex = null;

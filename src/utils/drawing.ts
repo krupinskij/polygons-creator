@@ -3,6 +3,9 @@ import _ from '../creator';
 import Point from '../model/Point';
 
 import { Color } from '../constants/Color';
+import Polygon from '../../model/Polygon';
+import { throwError } from '../helpers/throwError';
+import { ErrorCode } from '../constants/ErrorCode';
 
 export function drawPoint(p: Point, r: number, color: Color): void {
   _.context.fillStyle = color;
@@ -18,7 +21,11 @@ function drawPixel(p: Point, w: number): void {
   _.context.fillRect(p.x, p.y, w, w);
 }
 
-export function drawLine({ x: x1, y: y1 }: Point, { x: x2, y: y2 }: Point, color: Color) {
+export function drawLine(
+  { x: x1, y: y1 }: Point,
+  { x: x2, y: y2 }: Point = { x: x1, y: y1 },
+  color: Color,
+) {
   _.context.fillStyle = color;
 
   if (Math.abs(y2 - y1) < Math.abs(x2 - x1)) {
@@ -95,18 +102,22 @@ export function drawLine({ x: x1, y: y1 }: Point, { x: x2, y: y2 }: Point, color
 }
 
 export function drawPolygons() {
-  _.polygons.forEach((polygon) => {
-    for (let i = 0; i < polygon.vertices.length; i++) {
-      drawLine(
-        polygon.vertices[i].position,
-        polygon.vertices[(i + 1) % polygon.vertices.length].position,
-        polygon.vertices[i].edgeColor,
-      );
-      drawPoint(
-        polygon.vertices[i].position,
-        polygon.vertices[i].radius,
-        polygon.vertices[i].color,
-      );
-    }
+  _.polygons
+    .filter((polygon) => polygon.id !== _.currentPolygon?.id)
+    .forEach((polygon) => {
+      polygon.vertices.forEach((vertex) => {
+        drawLine(vertex.position, vertex.nextVertex?.position || vertex.position, Color.Gray);
+      });
+      polygon.vertices.forEach((vertex) => {
+        drawPoint(vertex.position, vertex.radius, Color.Gray);
+      });
+    });
+
+  if (!_.currentPolygon) return;
+  _.currentPolygon.vertices.forEach((vertex) => {
+    drawLine(vertex.position, vertex.nextVertex?.position || vertex.position, vertex.edgeColor);
+  });
+  _.currentPolygon.vertices.forEach((vertex) => {
+    drawPoint(vertex.position, vertex.radius, vertex.color);
   });
 }

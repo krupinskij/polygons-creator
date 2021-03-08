@@ -21,7 +21,7 @@ export default class Creator {
   private static mode = Mode.Default;
 
   private static polygonsIterator = 0;
-  private static currentPolygon: Polygon | null = null;
+  public static currentPolygon: Polygon | null = null;
   public static polygons: Polygon[] = [];
 
   private static prevPoint: Point | null = null;
@@ -42,6 +42,8 @@ export default class Creator {
 
     Creator.hCanvas.height = Creator.canvas.height * 2;
     Creator.hCanvas.width = Creator.canvas.width * 2;
+
+    refreshCanvas();
   }
 
   public static startAdding(): HTMLLIElement {
@@ -54,7 +56,8 @@ export default class Creator {
     const tab = createNewTab(Creator.polygonsIterator);
     tab.addEventListener('click', () => {
       Creator.currentPolygon =
-        Creator.polygons.find((polygon) => polygon.id === Creator.polygonsIterator) || null;
+        Creator.polygons.find((polygon) => polygon.id === Creator.polygonsIterator) ||
+        throwError(ErrorCode.CurrentPolygonError);
     });
     tabs.appendChild(tab);
 
@@ -65,6 +68,7 @@ export default class Creator {
   }
 
   public static endAdding(): void {
+    if (Creator.mode !== Mode.Adding) return;
     if (!Creator.currentPolygon) throwError(ErrorCode.AddPolygonError);
 
     const length = Creator.currentPolygon.vertices.length;
@@ -77,7 +81,6 @@ export default class Creator {
     Creator.canvas.removeEventListener('mousemove', Creator.moveCursor);
 
     Creator.mode = Mode.Default;
-    Creator.currentPolygon = null;
     Creator.prevPoint = Creator.currPoint = null;
 
     refreshCanvas();
@@ -88,7 +91,7 @@ export default class Creator {
 
     Creator.prevPoint = getPoint(event);
 
-    const length = Creator.currentPolygon.vertices.length;
+    let length = Creator.currentPolygon.vertices.length;
 
     if (
       length > 2 &&
@@ -103,12 +106,15 @@ export default class Creator {
     }
 
     Creator.currentPolygon.vertices.push(new Vertex(Creator.prevPoint));
+    length++;
 
     if (length > 1) {
       Creator.currentPolygon.vertices[length - 2].nextVertex =
         Creator.currentPolygon.vertices[length - 1];
       Creator.currentPolygon.vertices[length - 1].prevVertex =
         Creator.currentPolygon.vertices[length - 2];
+      Creator.currentPolygon.vertices[length - 1].nextVertex = Creator.currentPolygon.vertices[0];
+      Creator.currentPolygon.vertices[0].prevVertex = Creator.currentPolygon.vertices[length - 1];
     }
 
     refreshCanvas();
@@ -142,6 +148,15 @@ export default class Creator {
     const elem = event.target as HTMLElement;
     const id = elem.id.substring(8);
 
-    Creator.currentPolygon = Creator.polygons.find((polygon) => polygon.id === +id) || null;
+    Creator.currentPolygon =
+      Creator.polygons.find((polygon) => polygon.id === +id) ||
+      throwError(ErrorCode.CurrentPolygonError);
+
+    refreshCanvas();
+  }
+
+  public static unsetCurrentPolygon() {
+    Creator.currentPolygon = null;
+    refreshCanvas();
   }
 }

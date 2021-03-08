@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   Creator.init();
 
+  getElementById('none-tab').addEventListener('click', Creator.unsetCurrentPolygon);
+  getElementById('sidenav-trigger').addEventListener('click', Creator.endAdding);
+
   const addButton = getElementById('add-button');
   addButton.addEventListener('click', () => {
     const tab = Creator.startAdding();

@@ -14,17 +14,25 @@ document.addEventListener('DOMContentLoaded', function () {
   M.Collapsible.init(document.querySelectorAll('.collapsible'));
   M.Tabs.init(document.querySelectorAll('.tabs'));
 
+  const layer = getElementById('layer');
+  const canvasContainer = getElementById('canvas-container');
   const sidenavInstance = M.Sidenav.getInstance(document.getElementById('slide-out'));
   document.querySelectorAll('#slide-out button').forEach((button) => {
     button.addEventListener('click', () => {
       sidenavInstance.close();
+      layer.classList.remove('layer-hidden');
+      canvasContainer.classList.add('canvas-panel-edit');
     });
   });
 
   Creator.init();
 
+  layer.addEventListener('click', () => {
+    Creator.endAdding();
+    layer.classList.add('layer-hidden');
+    canvasContainer.classList.remove('canvas-panel-edit');
+  });
   getElementById('none-tab').addEventListener('click', Creator.unsetCurrentPolygon);
-  getElementById('sidenav-trigger').addEventListener('click', Creator.endAdding);
 
   const addButton = getElementById('add-button');
   addButton.addEventListener('click', () => {
@@ -36,10 +44,5 @@ document.addEventListener('DOMContentLoaded', function () {
     const a = tab.firstChild as HTMLElement;
     instance.$tabLinks.add(a);
     instance.select(a.id);
-  });
-
-  const stopButton = getElementById('stop-button');
-  stopButton.addEventListener('click', () => {
-    Creator.endAdding();
   });
 });

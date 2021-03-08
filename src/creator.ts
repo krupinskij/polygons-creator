@@ -9,7 +9,9 @@ import { calcDistance } from './helpers/calcDistance';
 import { Color } from './constants/Color';
 import Vertex from './model/Vertex';
 import { drawLine, drawPoint } from './utils/drawing';
-import refreshCanvas from './helpers/refreshCanvas';
+import { refreshCanvas } from './helpers/refreshCanvas';
+
+import './utils/edition';
 
 export default class Creator {
   public static canvas: HTMLCanvasElement = getElementById('canvas');
@@ -24,8 +26,8 @@ export default class Creator {
   public static currentPolygon: Polygon | null = null;
   public static polygons: Polygon[] = [];
 
-  private static prevPoint: Point | null = null;
-  private static currPoint: Point | null = null;
+  public static prevPoint: Point | null = null;
+  public static currPoint: Point | null = null;
 
   public static thickness = 1;
 
@@ -93,10 +95,7 @@ export default class Creator {
 
     let length = Creator.currentPolygon.vertices.length;
 
-    if (
-      length > 2 &&
-      calcDistance(Creator.prevPoint, Creator.currentPolygon.vertices[0].position) <= 10
-    ) {
+    if (length > 2 && calcDistance(Creator.prevPoint, Creator.currentPolygon.vertices[0].position) <= 10) {
       Creator.endAdding();
       return;
     }
@@ -109,10 +108,8 @@ export default class Creator {
     length++;
 
     if (length > 1) {
-      Creator.currentPolygon.vertices[length - 2].nextVertex =
-        Creator.currentPolygon.vertices[length - 1];
-      Creator.currentPolygon.vertices[length - 1].prevVertex =
-        Creator.currentPolygon.vertices[length - 2];
+      Creator.currentPolygon.vertices[length - 2].nextVertex = Creator.currentPolygon.vertices[length - 1];
+      Creator.currentPolygon.vertices[length - 1].prevVertex = Creator.currentPolygon.vertices[length - 2];
       Creator.currentPolygon.vertices[length - 1].nextVertex = Creator.currentPolygon.vertices[0];
       Creator.currentPolygon.vertices[0].prevVertex = Creator.currentPolygon.vertices[length - 1];
     }
@@ -136,10 +133,7 @@ export default class Creator {
       drawLine(Creator.currentPolygon.vertices[0].position, Creator.currPoint, Color.Blue);
     }
 
-    if (
-      length > 2 &&
-      calcDistance(Creator.currPoint, Creator.currentPolygon.vertices[0].position) <= 15
-    ) {
+    if (length > 2 && calcDistance(Creator.currPoint, Creator.currentPolygon.vertices[0].position) <= 15) {
       drawPoint(Creator.currentPolygon.vertices[0].position, 15, Color.Blue);
     }
   }
@@ -149,8 +143,7 @@ export default class Creator {
     const id = elem.id.substring(8);
 
     Creator.currentPolygon =
-      Creator.polygons.find((polygon) => polygon.id === +id) ||
-      throwError(ErrorCode.CurrentPolygonError);
+      Creator.polygons.find((polygon) => polygon.id === +id) || throwError(ErrorCode.CurrentPolygonError);
 
     refreshCanvas();
   }

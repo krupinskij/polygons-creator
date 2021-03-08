@@ -3,9 +3,6 @@ import _ from '../creator';
 import Point from '../model/Point';
 
 import { Color } from '../constants/Color';
-import Polygon from '../../model/Polygon';
-import { throwError } from '../helpers/throwError';
-import { ErrorCode } from '../constants/ErrorCode';
 
 export function drawPoint(p: Point, r: number, color: Color): void {
   _.context.fillStyle = color;
@@ -21,11 +18,7 @@ function drawPixel(p: Point, w: number): void {
   _.context.fillRect(p.x, p.y, w, w);
 }
 
-export function drawLine(
-  { x: x1, y: y1 }: Point,
-  { x: x2, y: y2 }: Point = { x: x1, y: y1 },
-  color: Color,
-) {
+export function drawLine({ x: x1, y: y1 }: Point, { x: x2, y: y2 }: Point = { x: x1, y: y1 }, color: Color) {
   _.context.fillStyle = color;
 
   if (Math.abs(y2 - y1) < Math.abs(x2 - x1)) {

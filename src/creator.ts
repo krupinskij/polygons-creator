@@ -152,4 +152,9 @@ export default class Creator {
     Creator.currentPolygon = null;
     refreshCanvas();
   }
+
+  public static setThickness(thickness: number) {
+    Creator.thickness = thickness;
+    refreshCanvas();
+  }
 }

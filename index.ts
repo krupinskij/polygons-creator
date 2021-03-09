@@ -45,4 +45,10 @@ document.addEventListener('DOMContentLoaded', function () {
     instance.$tabLinks.add(a);
     instance.select(a.id);
   });
+
+  const lineThicknessInput: HTMLInputElement = getElementById('line-thickness');
+  lineThicknessInput.addEventListener('change', (event: Event) => {
+    const target: any = event.target;
+    Creator.setThickness(target.value);
+  });
 });

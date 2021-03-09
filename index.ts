@@ -51,4 +51,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const target: any = event.target;
     Creator.setThickness(target.value);
   });
+
+  const antialiasingInput: HTMLInputElement = getElementById('antialiasing');
+  antialiasingInput.addEventListener('change', (event: Event) => {
+    const target: any = event.target;
+    Creator.setDrawer(target.checked);
+  });
 });

@@ -6,7 +6,6 @@ import { getPoint } from '../helpers/getPoint';
 import { refreshCanvas } from '../helpers/refreshCanvas';
 import { throwError } from '../helpers/throwError';
 import Vertex from '../model/Vertex';
-import { drawPoint } from '../utils/drawing';
 import EditionController from './EditionController';
 
 class DeleteVertexController implements EditionController {
@@ -58,7 +57,7 @@ class DeleteVertexController implements EditionController {
       if (!Creator.currPoint) return;
 
       if (calcDistance(vertex.position, Creator.currPoint) < 10) {
-        drawPoint(vertex.position, 10, Color.Red);
+        Creator.drawer.drawPoint(vertex.position, 10, Color.Red);
         this.vertexToDelete = vertex;
         this.canDeleteVertex = true;
       }

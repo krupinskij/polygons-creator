@@ -8,10 +8,14 @@ import { getPoint } from './helpers/getPoint';
 import { calcDistance } from './helpers/calcDistance';
 import { Color } from './constants/Color';
 import Vertex from './model/Vertex';
-import { drawLine, drawPoint } from './utils/drawing';
+//import { drawLine, drawPoint } from './utils/drawing';
 import { refreshCanvas } from './helpers/refreshCanvas';
 
+import defaultDrawingController from './controllers/drawing/DefaultDrawingController';
+import multiSamplingDrawingController from './controllers/drawing/MultiSamplingDrawingController';
+
 import './utils/edition';
+import DrawingController from './controllers/drawing/DrawingController';
 
 export default class Creator {
   public static canvas: HTMLCanvasElement = getElementById('canvas');
@@ -30,8 +34,10 @@ export default class Creator {
   public static currPoint: Point | null = null;
 
   public static thickness = 1;
+  public static drawer: DrawingController;
 
   static init() {
+    Creator.drawer = defaultDrawingController;
     Creator.resizeCanvas();
     window.addEventListener('resize', Creator.resizeCanvas);
   }
@@ -124,17 +130,19 @@ export default class Creator {
 
     refreshCanvas();
 
-    drawPoint(Creator.currPoint, 5, Color.Blue);
+    Creator.drawer.drawPoint(Creator.currPoint, 5, Color.Blue);
 
-    if (Creator.prevPoint) drawLine(Creator.prevPoint, Creator.currPoint, Color.Blue);
+    if (Creator.prevPoint) {
+      Creator.drawer.drawLine(Creator.prevPoint, Creator.currPoint, Color.Blue);
+    }
 
     const length = Creator.currentPolygon.vertices.length;
     if (length) {
-      drawLine(Creator.currentPolygon.vertices[0].position, Creator.currPoint, Color.Blue);
+      Creator.drawer.drawLine(Creator.currentPolygon.vertices[0].position, Creator.currPoint, Color.Blue);
     }
 
     if (length > 2 && calcDistance(Creator.currPoint, Creator.currentPolygon.vertices[0].position) <= 15) {
-      drawPoint(Creator.currentPolygon.vertices[0].position, 15, Color.Blue);
+      Creator.drawer.drawPoint(Creator.currentPolygon.vertices[0].position, 15, Color.Blue);
     }
   }
 
@@ -155,6 +163,11 @@ export default class Creator {
 
   public static setThickness(thickness: number) {
     Creator.thickness = thickness;
+    refreshCanvas();
+  }
+
+  public static setDrawer(multisampling: any) {
+    Creator.drawer = multisampling ? multiSamplingDrawingController : defaultDrawingController;
     refreshCanvas();
   }
 }

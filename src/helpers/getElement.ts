@@ -1,8 +1,7 @@
-import { ErrorCode } from '../constants/ErrorCode';
 import { throwError } from './throwError';
 
 export function getElementById<T extends HTMLElement>(id: string): T {
-  return (document.getElementById(id) as T) || throwError(ErrorCode.ElementNotFound);
+  return (document.getElementById(id) as T) || throwError('Error getting element');
 }
 
 export function getContext(canvas: HTMLCanvasElement): CanvasRenderingContext2D {

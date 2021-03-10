@@ -1,7 +1,9 @@
-import { Color } from '../../constants/Color';
 import Creator from '../../creator';
-import Point from '../../model/Point';
 import DrawingController from './DrawingController';
+
+import Point from '../../model/Point';
+
+import { Color } from '../../constants/Color';
 
 class DefaultDrawingController implements DrawingController {
   drawPoint({ x, y }: Point, r: number, color: Color): void {

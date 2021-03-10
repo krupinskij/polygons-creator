@@ -1,5 +1,6 @@
 import Creator from '../creator';
 import Polygon from '../model/Polygon';
+
 import { createNewTab, getElementById } from './getElement';
 import { throwError } from './throwError';
 

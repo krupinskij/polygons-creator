@@ -1,4 +1,4 @@
-import { Edition } from '../constants/Edition';
+import { Edition } from '../../constants/Edition';
 
 export default interface EditionController {
   edition: Edition;

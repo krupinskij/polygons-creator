@@ -1,4 +1,3 @@
-require('materialize-loader!./materialize.config.js');
 const M = require('./node_modules/materialize-css/dist/js/materialize.min');
 
 import './style.scss';

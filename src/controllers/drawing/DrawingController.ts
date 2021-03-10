@@ -1,5 +1,6 @@
-import { Color } from '../../constants/Color';
 import Point from '../../model/Point';
+
+import { Color } from '../../constants/Color';
 
 export default interface DrawingController {
   drawPoint(p: Point, r: number, color: Color): void;

@@ -1,5 +1,6 @@
-import { Color } from '../constants/Color';
 import Creator from '../creator';
+
+import { Color } from '../constants/Color';
 
 export function refreshCanvas() {
   Creator.context.clearRect(0, 0, Creator.canvas.width, Creator.canvas.height);

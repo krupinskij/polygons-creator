@@ -1,21 +1,22 @@
+import Polygon from './model/Polygon';
+import Vertex from './model/Vertex';
+import Point from './model/Point';
+
 import { Mode } from './constants/Mode';
-import { ErrorCode } from './constants/ErrorCode';
+import { Color } from './constants/Color';
+
 import { getContext, getElementById } from './helpers/getElement';
 import { throwError } from './helpers/throwError';
-import Polygon from './model/Polygon';
-import Point from '../model/Point';
 import { getPoint } from './helpers/getPoint';
 import { calcDistance } from './helpers/calcDistance';
-import { Color } from './constants/Color';
-import Vertex from './model/Vertex';
 import { refreshCanvas } from './helpers/refreshCanvas';
+import { createPolygon } from './helpers/createPolygon';
 
+import DrawingController from './controllers/drawing/DrawingController';
 import defaultDrawingController from './controllers/drawing/DefaultDrawingController';
 import multiSamplingDrawingController from './controllers/drawing/MultiSamplingDrawingController';
 
 import './utils/edition';
-import DrawingController from './controllers/drawing/DrawingController';
-import { createPolygon } from './helpers/createPolygon';
 
 export default class Creator {
   public static canvas: HTMLCanvasElement = getElementById('canvas');
@@ -67,7 +68,7 @@ export default class Creator {
 
   public static endAdding(): void {
     if (Creator.mode !== Mode.Adding) return;
-    if (!Creator.currentPolygon) throwError(ErrorCode.AddPolygonError);
+    if (!Creator.currentPolygon) throwError('Error adding new polygon');
 
     const length = Creator.currentPolygon.vertices.length;
 
@@ -85,7 +86,7 @@ export default class Creator {
   }
 
   private static addVertex(event: MouseEvent): void {
-    if (!Creator.currentPolygon) throwError(ErrorCode.AddPolygonError);
+    if (!Creator.currentPolygon) throwError('Error adding new vertex');
 
     Creator.prevPoint = getPoint(event);
 
@@ -114,7 +115,7 @@ export default class Creator {
   }
 
   private static moveCursor(event: MouseEvent): void {
-    if (!Creator.currentPolygon) throwError(ErrorCode.AddPolygonError);
+    if (!Creator.currentPolygon) throwError('Error moving cursor');
 
     Creator.currPoint = getPoint(event);
 
@@ -141,7 +142,7 @@ export default class Creator {
     const id = elem.id.substring(8);
 
     Creator.currentPolygon =
-      Creator.polygons.find((polygon) => polygon.id === +id) || throwError(ErrorCode.CurrentPolygonError);
+      Creator.polygons.find((polygon) => polygon.id === +id) || throwError('Error setting polygon');
 
     refreshCanvas();
   }

@@ -1,12 +1,15 @@
-import { Color } from '../constants/Color';
-import { Edition } from '../constants/Edition';
-import Creator from '../creator';
-import { areInLine } from '../helpers/areInLine';
-import { getPoint } from '../helpers/getPoint';
-import { refreshCanvas } from '../helpers/refreshCanvas';
-import { throwError } from '../helpers/throwError';
-import Vertex from '../model/Vertex';
+import Creator from '../../creator';
 import EditionController from './EditionController';
+
+import Vertex from '../../model/Vertex';
+
+import { Color } from '../../constants/Color';
+import { Edition } from '../../constants/Edition';
+
+import { areInLine } from '../../helpers/areInLine';
+import { getPoint } from '../../helpers/getPoint';
+import { refreshCanvas } from '../../helpers/refreshCanvas';
+import { throwError } from '../../helpers/throwError';
 
 class AddVertexController implements EditionController {
   public edition: Edition;

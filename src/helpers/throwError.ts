@@ -1,5 +1,3 @@
-import { ErrorCode } from '../constants/ErrorCode';
-
-export function throwError(errorCode: ErrorCode | string): never {
+export function throwError(errorCode: string): never {
   throw new Error(errorCode);
 }

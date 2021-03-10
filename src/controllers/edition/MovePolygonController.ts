@@ -1,9 +1,11 @@
-import { getPoint } from '../helpers/getPoint';
-import { refreshCanvas } from '../helpers/refreshCanvas';
-import { Edition } from '../constants/Edition';
-import Creator from '../creator';
-import { throwError } from '../helpers/throwError';
+import Creator from '../../creator';
 import EditionController from './EditionController';
+
+import { Edition } from '../../constants/Edition';
+
+import { getPoint } from '../../helpers/getPoint';
+import { refreshCanvas } from '../../helpers/refreshCanvas';
+import { throwError } from '../../helpers/throwError';
 
 class MovePolygonController implements EditionController {
   public edition: Edition;

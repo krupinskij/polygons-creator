@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: ['./index.ts', 'materialize-loader!./materialize.config.js'],
+  entry: ['./index.ts', 'materialize-loader!./theme/materialize.config.js'],
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),

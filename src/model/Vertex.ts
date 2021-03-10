@@ -1,5 +1,6 @@
-import { Color } from '../constants/Color';
 import Point from './Point';
+
+import { Color } from '../constants/Color';
 
 export default class Vertex {
   public radius: number;

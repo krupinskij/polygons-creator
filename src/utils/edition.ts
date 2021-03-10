@@ -2,12 +2,12 @@ import Creator from '../creator';
 
 import { getElementById } from '../helpers/getElement';
 
-import movePolygonController from '../controllers/MovePolygonController';
-import moveVertexController from '../controllers/MoveVertexController';
-import addVertexController from '../controllers/AddVertexController';
-import deleteVertexController from '../controllers/RemoveVertexController';
-import moveEdgeController from '../controllers/MoveEdgeController';
-import EditionController from '../controllers/EditionController';
+import deleteVertexController from '../controllers/edition/RemoveVertexController';
+import movePolygonController from '../controllers/edition/MovePolygonController';
+import moveVertexController from '../controllers/edition/MoveVertexController';
+import addVertexController from '../controllers/edition/AddVertexController';
+import moveEdgeController from '../controllers/edition/MoveEdgeController';
+import EditionController from '../controllers/edition/EditionController';
 
 const movePolygonBtn: HTMLButtonElement = getElementById('button-polygon-movePolygon');
 const moveVertexBtn: HTMLButtonElement = getElementById('button-polygon-moveVertex');

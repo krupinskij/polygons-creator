@@ -1,6 +1,6 @@
 import { Mode } from './constants/Mode';
 import { ErrorCode } from './constants/ErrorCode';
-import { createNewTab, getContext, getElementById } from './helpers/getElement';
+import { getContext, getElementById } from './helpers/getElement';
 import { throwError } from './helpers/throwError';
 import Polygon from './model/Polygon';
 import Point from '../model/Point';
@@ -8,7 +8,6 @@ import { getPoint } from './helpers/getPoint';
 import { calcDistance } from './helpers/calcDistance';
 import { Color } from './constants/Color';
 import Vertex from './model/Vertex';
-//import { drawLine, drawPoint } from './utils/drawing';
 import { refreshCanvas } from './helpers/refreshCanvas';
 
 import defaultDrawingController from './controllers/drawing/DefaultDrawingController';
@@ -16,6 +15,7 @@ import multiSamplingDrawingController from './controllers/drawing/MultiSamplingD
 
 import './utils/edition';
 import DrawingController from './controllers/drawing/DrawingController';
+import { createPolygon } from './helpers/createPolygon';
 
 export default class Creator {
   public static canvas: HTMLCanvasElement = getElementById('canvas');
@@ -26,7 +26,7 @@ export default class Creator {
 
   private static mode = Mode.Default;
 
-  private static polygonsIterator = 0;
+  public static polygonsIterator = 0;
   public static currentPolygon: Polygon | null = null;
   public static polygons: Polygon[] = [];
 
@@ -56,18 +56,8 @@ export default class Creator {
 
   public static startAdding(): HTMLLIElement {
     Creator.mode = Mode.Adding;
-    Creator.polygonsIterator++;
-    Creator.currentPolygon = new Polygon(Creator.polygonsIterator);
-    Creator.polygons = [...Creator.polygons, Creator.currentPolygon];
 
-    const tabs: HTMLUListElement = getElementById('tabs');
-    const tab = createNewTab(Creator.polygonsIterator);
-    tab.addEventListener('click', () => {
-      Creator.currentPolygon =
-        Creator.polygons.find((polygon) => polygon.id === Creator.polygonsIterator) ||
-        throwError(ErrorCode.CurrentPolygonError);
-    });
-    tabs.appendChild(tab);
+    const tab = createPolygon();
 
     Creator.canvas.addEventListener('click', Creator.addVertex);
     Creator.canvas.addEventListener('mousemove', Creator.moveCursor);

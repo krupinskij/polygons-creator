@@ -11,7 +11,7 @@
 
   <body>
     <div class="layer layer-hidden" id="layer"></div>
-    <nav class="nav-extended blue accent-2">
+    <nav class="nav-extended">
       <div class="nav-wrapper">
         <a id="sidenav-trigger" href="#" data-target="slide-out" class="sidenav-trigger">
           <i class="material-icons">menu</i>
@@ -33,7 +33,7 @@
       <li><div class="divider"></div></li>
       <li>
         <div class="container button-container">
-          <button class="waves-effect waves-light btn-large blue accent-2" id="add-button">
+          <button class="waves-effect waves-light btn-large edit-button" id="add-button">
             <i class="material-icons right">add</i>Create new
           </button>
         </div>
@@ -45,19 +45,19 @@
             <div class="collapsible-header center-align"><i class="material-icons">create</i>Edition</div>
             <div class="collapsible-body">
               <div class="container center-align">
-                <button id="button-polygon-movePolygon" class="waves-effect waves-light btn btn-option blue accent-2">
+                <button id="button-polygon-movePolygon" class="waves-effect waves-light btn btn-option edit-button">
                   Move polygon
                 </button>
-                <button id="button-polygon-moveVertex" class="waves-effect waves-light btn btn-option blue accent-2">
+                <button id="button-polygon-moveVertex" class="waves-effect waves-light btn btn-option edit-button">
                   Move vertex
                 </button>
-                <button id="button-polygon-addVertex" class="waves-effect waves-light btn btn-option blue accent-2">
+                <button id="button-polygon-addVertex" class="waves-effect waves-light btn btn-option edit-button">
                   Add vertex
                 </button>
-                <button id="button-polygon-deleteVertex" class="waves-effect waves-light btn btn-option blue accent-2">
+                <button id="button-polygon-deleteVertex" class="waves-effect waves-light btn btn-option edit-button">
                   Delete vertex
                 </button>
-                <button id="button-polygon-moveEdge" class="waves-effect waves-light btn btn-option blue accent-2">
+                <button id="button-polygon-moveEdge" class="waves-effect waves-light btn btn-option edit-button">
                   Move edge
                 </button>
               </div>
@@ -68,7 +68,7 @@
             <div class="collapsible-body">
               <div class="container center-align" action="">
                 <label>
-                  <input type="checkbox" class="filled-in blue accent-2" id="antialiasing" />
+                  <input type="checkbox" class="filled-in" id="antialiasing" />
                   <span>Antialiasing</span>
                 </label>
                 <div>
@@ -77,15 +77,6 @@
                     <input placeholder="Line thickness" value="1" min="1" max="10" id="line-thickness" type="number" />
                   </div>
                 </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="collapsible-header"><i class="material-icons">save_alt</i>Save or load</div>
-            <div class="collapsible-body">
-              <div class="container center-align">
-                <button class="waves-effect waves-light btn btn-option blue accent-2">Save</button>
-                <button class="waves-effect waves-light btn btn-option blue accent-2">Load</button>
               </div>
             </div>
           </li>

@@ -1,10 +1,10 @@
-import './node_modules/materialize-css/dist/css/materialize.min.css';
+require('materialize-loader!./materialize.config.js');
+const M = require('./node_modules/materialize-css/dist/js/materialize.min');
+
 import './style.scss';
 
 import './src/assets/logo.svg';
 import './src/assets/favicon.ico';
-
-const M = require('./node_modules/materialize-css/dist/js/materialize.min');
 
 import Creator from './src/creator';
 import { getElementById } from './src/helpers/getElement';
@@ -17,11 +17,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const layer = getElementById('layer');
   const canvasContainer = getElementById('canvas-container');
   const sidenavInstance = M.Sidenav.getInstance(document.getElementById('slide-out'));
+  document.querySelectorAll('#slide-out .edit-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      layer.classList.remove('layer-hidden');
+      canvasContainer.classList.add('canvas-panel-edit');
+    });
+  });
   document.querySelectorAll('#slide-out button').forEach((button) => {
     button.addEventListener('click', () => {
       sidenavInstance.close();
-      layer.classList.remove('layer-hidden');
-      canvasContainer.classList.add('canvas-panel-edit');
     });
   });
 

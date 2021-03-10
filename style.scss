@@ -5,6 +5,7 @@ body {
   background-color: #eee;
 }
 
+
 .layer {
   position: absolute;
   top: 0;
@@ -22,7 +23,7 @@ body {
 
 @media only screen and (min-width: 993px) {
   nav a.sidenav-trigger {
-      display: block;
+      display: block !important;
   }
 }
 
@@ -34,7 +35,7 @@ body {
 .button-container {
   display: flex;
   justify-content: center;
-  margin: 10px auto;
+  margin: 10px auto !important;
 }
 
 .btn-option {
@@ -42,7 +43,7 @@ body {
 }
 
 .sidenav .divider {
-  margin: 0;
+  margin: 0 !important;
 }
 
 .footer {
@@ -90,14 +91,4 @@ body {
 
 .input-field input[type=number] {
   width: 80%;
-}
-
-.input-field input[type=number]:focus {
-  border-bottom: 1px solid #448aff !important;
-  box-shadow: 0 1px 0 0 #448aff !important;
-}
-
-[type="checkbox"].filled-in:checked+span:not(.lever):after {
-  border-color: #448aff !important;
-  background-color: #448aff !important;
 }

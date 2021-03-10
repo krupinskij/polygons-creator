@@ -1,4 +1,4 @@
-export enum Modification {
+export enum Edition {
   None,
   MovePolygon,
   MoveVertex,

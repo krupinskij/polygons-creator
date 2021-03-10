@@ -1,4 +1,4 @@
 export enum Mode {
   Default,
-  AddingPolygon,
+  Adding,
 }

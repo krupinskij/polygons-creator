@@ -1,0 +1,94 @@
+body {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background-color: #eee;
+}
+
+
+.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgb(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.layer-hidden {
+  display: none;
+}
+
+@media only screen and (min-width: 993px) {
+  nav a.sidenav-trigger {
+      display: block !important;
+  }
+}
+
+.sidenav {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px auto !important;
+}
+
+.btn-option {
+  width: 80%;
+}
+
+.sidenav .divider {
+  margin: 0 !important;
+}
+
+.footer {
+  margin-top: auto;
+  line-height: inherit !important;
+  font-size: 0.8em;
+}
+
+.flaticon {
+  margin-bottom: 10px;
+}
+
+.link {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.canvas-panel {
+  height: calc(100% - 50px);
+  margin: 25px;
+  border: 1px solid #bbb;
+  background-color: white;
+
+  cursor: crosshair;
+  z-index: 3;
+}
+
+.canvas-panel-edit {
+  border-style: dashed;
+  box-shadow: 0px 0px 25px #333;
+}
+
+#canvas {
+  position: absolute;
+  z-index: 2;
+}
+
+#hidden-canvas {
+  display: none;
+}
+
+.tab-link {
+  display: block !important;
+}
+
+.input-field input[type=number] {
+  width: 80%;
+}
